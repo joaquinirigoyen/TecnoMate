@@ -1,0 +1,102 @@
+
+h5{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.container {
+    border: 5px solid #E3E3E5;
+    box-shadow: 10px black;
+    background-color: white;
+    padding: 35px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px black;
+    max-width: 70%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.fondoPagina {
+    width: 100%;
+    height: 100%;
+}
+
+.fondoExtendido {
+    height: 600px;
+}
+
+.colorGradiente {
+    background: linear-gradient(to right, rgb(166, 233, 234), rgb(238, 201, 13));
+}
+
+.opcional {
+    color: #AAAAAA;
+}
+
+.contenedor-dato {
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: 600;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+h2 {
+    text-align: center;
+    font-weight: 100;
+    color: #61687B;
+  }
+  
+  .contenedor-general {
+    max-height: 3300px;
+    max-width: 2300;
+    border-top: 0.5px solid #AAAAAA;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .bloque-dato {
+    font-size: 15px;
+    color: #282828;
+  }
+  
+  .border {
+    border-top: 1px solid #AAAAAA;
+  }
+  
+  h4 {
+    color: #545A94;
+  }
+
+  /*---------------------------------------------------------------------------------------------*/
+  .form-check-label {
+    font-weight: 450;
+}
+
+.boton {
+    align-items: center;
+    width: 500px;
+}
+
+#agregar-experiencia {
+    width: 98%;
+    height: 40px;
+}
+
+.expTexto {
+    width: auto;
+}
+
+#agregar-experiencia,
+.expTexto,
+.eliminar-experiencia {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    color: black;
+}
+
+#agregar-experiencia:hover,
+.eliminar-experiencia:hover {
+    background-color: #E3E3E5;
+}

@@ -1,0 +1,17 @@
+# Pruebas Flor
+#colocar la ruta a los archivos a ignorar
+test/Actions
+tests/Admin/administrarMenu.php
+tests/Admin/administrarUsuarios.php
+tests/Admin/crearMenu.php
+tests/Admin/crearUsuario.php
+tests/Cliente/cambioContrasenia.php
+tests/Cliente/cambioEmail.php
+tests/Cliente/compras.php
+tests/Despoito/administrarCompras.php
+tests/Despoito/administrarProductos.php
+tests/Despoito/agregarProducto.php
+tests/login/verificacion.php
+tests/home.php
+tests/login.php
+tests/sesionIniciada.php

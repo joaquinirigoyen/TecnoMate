@@ -1,0 +1,339 @@
+/* -------------------- FUENTES -------------------- */
+@font-face {
+    font-family: 'Titillium_Web';
+    src: url('../../Utiles/fuentes/fuentes/AnyConv.com__TitilliumWeb-SemiBold.woff') format('woff');
+}
+
+/* -------------------- AJUSTES GENERALES -------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    color: var(--fuentes);
+}
+
+/* -------------------- DEFINICIÓN DE VARIABLES -------------------- */
+:root {
+    --estructura: #0C0C0D;
+    --fuentes: #8b8b8b;
+}
+
+/* -------------------- ESTILOS HEADER -------------------- */
+.header {
+    padding: 30px;
+    margin: 0;
+    height: 150px;
+    display: flex;
+}
+
+.menu-opciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+/* .menu-opciones a {
+    margin: 50px;
+    font-family: 'Titillium_Web', sans-serif;
+    font-size: 18px;
+} */
+
+.login {
+    margin-top: auto;
+}
+
+.login i {
+    font-size: 35px;
+}
+
+.navbar-collapse {
+
+    align-items: center;
+    justify-content: flex-start;
+    /* display: flex; */
+}
+
+@media screen and (max-width:1100px) {
+    .navbar-brand {
+        display: none;
+    }
+}
+
+.navbar {
+    font-size: 20px;
+    background-color: var(--estructura);
+    color: var(--fuentes);
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center; */
+}
+
+.navbar-collapse a {
+    padding: 5px;
+    font-family: 'Titillium_Web', sans-serif;
+    font-size: 23px;
+}
+
+.logo:hover {
+    transform: scale(1.5);
+    transition: transform 0.3s ease;
+}
+
+
+.navbar-brand:hover {
+    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.7);
+    border-radius: 85px;
+}
+
+/*ul li {
+    list-style: none;
+    margin-left: 75px;
+    float: left;
+    position: relative;
+}*/
+
+/*.menuUsuario ul li{
+    list-style: none;
+    margin-left: 55px;
+    float: left;
+    position: relative;
+}*/
+
+/*
+.menuUsuario2 ul li{
+    margin-left: 0px;
+}
+*/
+
+/* -------------------- ESTILOS FOOTER -------------------- */
+.footer {
+    padding: 70px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    border-top: solid 1px white;
+    padding: 15px;
+}
+
+.redes-sociales,
+.contacto {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 50px;
+    font-size: 15px;
+}
+.logo i,.contacto i:hover {
+  transform: scale(1.5);
+  transition: transform 0.3s ease;
+}
+
+
+/* -------------------- ESTILOS COMPARTIDOS HEADER Y FOOTER -------------------- */
+.header,
+.footer {
+    font-size: 20px;
+    background-color: var(--estructura);
+    color: var(--fuentes);
+
+}
+
+
+/* -------------------- DECORACIONES/DETALLES -------------------- */
+a:hover {
+    border-bottom: solid 1px rgb(73, 73, 73);
+}
+
+.logo-nav img {
+    width: 130px;
+    position: relative;
+    bottom: 20px;
+}
+
+.navbar a:hover {
+    background-color: rgb(36, 36, 36);
+}
+
+.menuUsuario2 a:hover {
+    background-color: rgba(255, 0, 0, 0);
+    text-decoration-color: aquamarine;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+/* -------------------- CONTENIDO DE LA PÁGINA INICIO -------------------- */
+
+.contenido-pagina {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.7)),
+        url(../../Archivos/Imagenes/fondo.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.carousel-inner {
+    padding: 50px;
+}
+
+/* -------------------- Modal crear cuenta e iniciar sesion-------------------- */
+.modal-title {
+    text-align: center;
+}
+
+@media screen and (max-width:1390px) {
+    .carousel-inner {
+        padding: auto;
+    }
+}
+.modal-title {
+  text-align: center;
+}
+.modal-content {
+background: rgba(207, 199, 199, 0.884);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgb(61, 56, 56);
+  color: white;
+}
+.form-control {
+background: rgba(98, 97, 97, 0.596);
+border-style: none;
+transition: 0.5s ease-in;
+outline: none;
+box-shadow: none;
+}
+.form-control:focus {
+background: rgba(110, 108, 108, 0.596);
+box-shadow: none;
+outline: none;
+}
+.form-control::placeholder {
+color: rgb(122, 115, 115);
+}
+.ingresar {
+background: #222A3F;
+padding: 10px;
+font-size: 16px;
+font-weight: 700!important;
+color: white;
+box-shadow: 0 0 30px rgba(0, 0, 0, 0.568);
+transition: 0.5s ease-in;
+}
+.ingresar:hover {
+color: white;
+}
+.crearcta {
+color: white;
+text-decoration-style: none;
+text-decoration-line: none;
+font-size: 20px;
+font-weight: 700!important;
+/* border: 2px solid white; */
+padding: 10px;
+border-radius: 10px;
+background: rgba(0, 0, 0, .5);
+}
+.crearcta:hover {
+color: rgb(255, 255, 255);
+text-decoration-style: none;
+text-decoration-line: none;
+cursor: pointer;
+}
+.btn-close{
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 20px;
+}
+.logologin{
+position: relative;
+top:2px;
+left: 80px;
+text-align: center;
+}
+
+/********************************* efecto de la card *****************/
+
+.sombraCarta:hover {
+    box-shadow: 0px 0px 20px rgba(156, 154, 154, 0.918);
+}
+
+/* -------------------- CONTENIDO DE LA VISTA ADMINISTRADOR -------------------- */
+
+/* -------------------- ICONOS DE ACCIONES -------------------- */
+.imagen-accion {
+    width: 320px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 20px 20px 0px 0px;
+    background-color: white;
+    background: linear-gradient(180deg, white, rgb(102, 102, 102));
+}
+
+/* -------------------- CARDS DE OPCIONES -------------------- */
+.contenedor-acciones {
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.contenedor-acciones>div {
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+    background-color: rgb(32, 32, 32);
+    border-radius: 20px;
+}
+
+.contenedor-acciones>div:hover {
+    background-color: rgb(37, 37, 37);
+}
+
+.accion-admin a {
+    text-decoration: none;
+}
+
+/* -------------------- TEXTO DE LA ACCIÓN -------------------- */
+.informacion-accion {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.informacion-accion>p:first-child {
+    font-weight: 30px;
+    color: var(--fuentes);
+}
+
+/* -------------------- BOTÓN DE LA CARD -------------------- */
+
+.informacion-accion button {
+    background-color: white;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+    color: var(--estructura);
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    font-size: 17px;
+    font-weight: 300px;
+    cursor: pointer;
+}
+
+.informacion-accion button:hover {
+    background-color: lightgrey;
+}
