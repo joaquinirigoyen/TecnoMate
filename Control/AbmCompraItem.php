@@ -7,14 +7,27 @@ class AbmCompraItem{
      * @return CompraItem
      */
     private function cargarObjeto($param){
+        $objItem = null;
         //print_r($param);
-        $obj = null;
-        if( array_key_exists('idcompraitem',$param) and array_key_exists('idproducto',$param)     
-          and array_key_exists('idcompra',$param) and array_key_exists('cicantidad',$param)){
-            $obj = new CompraItem();
-            $obj->setear($param['idcompraitem'], $param['idproducto'],$param['idcompra'],$param['cicantidad']);
+        if (array_key_exists('idcompraitem', $param)) {
+
+                $objUsuario = new Usuario();
+                $objUsuario->setIdUsuario($param['idusuario']);
+                $objUsuario->cargar();
+    
+                $objCompra = new Compra();
+                $objCompra->setIdCompra($param['idcompra']);
+                $objCompra->cargar();
+                 $objItem = new CompraItem();
+                $objItem->setear(
+                $param['idcompraitem'],
+                $objUsuario,
+                $objCompra,
+                $param['cicantidad']
+            );
+
         }
-        return $obj;
+        return $objItem;
     }
 
     /**
@@ -52,9 +65,14 @@ class AbmCompraItem{
      * @param array $param
      */
     public function alta($param){
+        print_r($param);
+        echo"estoy entrando al alta \n";
+        $param['idcompraitem'] = null;
         $resp = false;
         $unObjCompraI = $this->cargarObjeto($param);
+         verEstructura($unObjCompraI);
         if ($unObjCompraI!=null && $unObjCompraI->insertar()){
+            echo"estoy entrando al insertar \n";
             $resp = true;
         }
         return $resp;

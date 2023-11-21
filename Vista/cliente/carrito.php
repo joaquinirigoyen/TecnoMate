@@ -1,103 +1,51 @@
-
 <?php
 include_once("../../configuracion.php");
+$session =new Session();
 
-$datos = data_submitted();
-$texto = $datos["nombre"];
+$total=0;
+echo"<h3>Mi carrito</h3>";
+  
+  if (isset($_SESSION['carrito'])){
 
-$tituloPagina = "TechnoMate | " . $texto;
+    foreach($_SESSION['carrito'] as $indice => $arreglo){
+      echo"<hr>Producto" .$indice. "<br>";
 
-include_once("../estructura/headSeguro.php");
-include_once("../estructura/navSeguro.php");
-
-?>
-
-<<link rel="stylesheet" href="../vista/css/bootstrap/4.5.2/bootstrap.min.css">
-<div class="container border border-secondary principal mt-3 pt-3">
-   <h3 class="text-center">Mi Carrito</h3>
-    <div class="row text-muted m-0">
-        <?php 
-        
-          $datos = data_submitted();
-
-          $objUsuario = new AbmUsuario(); 
-            
-          //valida la session 
-           $param["idusuario"] = $_SESSION['idusuario'];
-
-           //busca el usuario por id
-           $usuario = $objUsuario->buscar($param);
-           // print_r($usuario);
-            
-           // busca las compras del usuario
-           $objCompra = new AbmCompra();
-           $compraActiva = $objCompra->buscarCarritoAbierto($param);
-           echo $compraActiva;
-
-           $objeItem = new AbmCompraItem(); 
-           $item= $objeItem->buscar( $compraActiva );
-
-          // print_r( $item);
-        
-          // $parame['idproducto']= $item['idproducto'];
+      $total += $arreglo['cant'] * $arreglo['precio'];
+      foreach($arreglo as $key => $value){
+        echo $key .":".$value."<br>";
+      }
+      echo '<a href="carrito.php?item='.$indice.'&accion=sumar">Agregar</a>';
+      echo '<a href="carrito.php?item='.$indice.'&accion=restar">Restar</a>';
+      echo '<a href="carrito.php?item='.$indice.'&accion=eliminar">Eliminar Item</a>';;
+    }
+    echo"<h3> Total de compra:$ " .$total."</h3>";
+    echo '<a href="homeCliente.php"> Volver</a>';
+    echo'<a href="finalizarCompra.php">Finalizar compra</a>';
+    //echo <a href="carrito.php?vaciar=true">Vaciar Carrito</a>';
+  }else{
+    echo "<script>alert('El carrito esta vacio');</script>";
+    //header("location:mostrarProductos.php");
+  }
 
 
-           $objeProd= new AbmProducto(); 
-           $parametro['idproducto']=$item['idproducto'];
 
-           $listaProducto=$objeProd->buscar($parametro); 
-        
-        
-        if(count($listaProducto )>0){
-            ?>
-            <table class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Cantidad </th>
-                        <th scope="col">Modificar</th>
-                      
-                                        
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                    
-                    foreach ($listaProducto as $objProducto) {                         
-                        echo '<tr>
-        
-                        <td>'.$objProducto->getProNombre().'</td>';
-                        echo '
-                        <td>'.$objProducto->getProDetalle().'</td>';
-                        echo '
-                        <td>'.$item->getCiCantidad().'</td>';
-                    
-                        echo '<td><a href="editarProducto.php?accion=editar&idproducto='.$objProducto->getIdproducto().'" class="btn  btn-dark">Editar</a></td>';
-                        echo '<td><a href="accionBorradoLogico.php?accion=borradoLogico&idproducto='.$objProducto->getIdproducto().'" class="btn btn-danger">Borrar</a></td>';
-                   
-                           echo'</tr>';
-                  
-                     }
-                    //fin foreach
-                    echo '    </tbody>
-                    </table>';
-                }
-                else{
-
-                    echo "<h3>No hay productos registrados </h3>";
-                }
-                
-                ?>
-            
-        
-</div>
-<div class="col-md-3">
-            <a href="formProducto.php"class="btn btn-primary mb-4">Nuevo Producto</a>
-        </div>
-</div>
-<div>
-<?php
-include ("../cargarProdCantidad.php");
-include ("../../Vista/estructura/footer.php");
+  if(isset($_REQUEST['item'])){
+    $producto=$_REQUEST['item'];
+    $accion=$_REQUEST['accion'];
+    $cantidad = $_SESSION['carrito'][$producto]['cant'];
+    $precio = $_SESSION['carrito'][$producto]['precio'];
+    if ($accion == "sumar") {
+      $cantidad++;
+      $_SESSION['carrito'][$producto]['cant'] = $cantidad;
+    } else if ($accion == "restar") {
+      if ($cantidad > 1) {
+        $cantidad--;
+        $_SESSION['carrito'][$producto]['cant'] = $cantidad;
+      }
+    }else if ($accion == "eliminar") {
+        unset($_SESSION['carrito'][$producto]);
+      }
+      $total += $cantidad * $precio;
+      header("location: carrito.php");
+  }
 ?>

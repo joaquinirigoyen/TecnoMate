@@ -153,4 +153,17 @@ class Session{
         session_destroy();
         return $resp;
     }
+
+/*
+    * Elimina el carrito
+    */
+   public function eliminarCarrito()
+   {
+       $exito = false;
+       if (isset($_SESSION['carrito'])) {
+           unset($_SESSION["carrito"]);
+           $exito = true;
+       }
+       return $exito;
+   }
 }

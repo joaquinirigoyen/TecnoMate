@@ -17,17 +17,11 @@ class AbmCompra{
      */
     private function cargarObjeto($param){
         $objCompra = null;
-        
-        /*OBSERVACIÓN: Se puede verificar la existencia de las claves que sean necesarias
-        en vez de obligar a cargar todo, esto puede aplicar en caso de que se quiera
-        cargar un objeto del cual no se tengan todos los datos.
-        En este caso se carga todo*/
-        
         if( 
-        array_key_exists('idcompra', $param) &&
+       // array_key_exists('idcompra', $param) &&
         array_key_exists('cofecha', $param) &&
         array_key_exists('idusuario', $param)
-        ){/*
+        ){
             $objUsuario = new Usuario();
             $objUsuario->setIdUsuario($param['idusuario']);
             $objUsuario->cargar();
@@ -38,13 +32,7 @@ class AbmCompra{
                 $param['idcompra'],
                 $param['cofecha'],
                 $objUsuario
-            );*/
-            $obj = new Compra();
-            $objUsuario = new Usuario();
-            $objUsuario->setIdUsuario($param['idusuario']);
-            $objUsuario->cargar();
-
-            $obj->setear($param['idcompra'], $param['cofecha'], $objUsuario);
+            );
         }
         return $objCompra;
     }
@@ -88,13 +76,12 @@ class AbmCompra{
      */
     public function alta($param){
         $resp = false;
-
         /*Si el id del objeto tuviera autoincrement en la base de datos entonces los campos claves 
         del mismo deberían setearse en nulos al momento de realizar la insersión*/
         $param['idcompra'] = null;
 
         $obj = $this->cargarObjeto($param);
-        // verEstructura($obj);
+        //verEstructura($obj);
         if ($obj != null && $obj->insertar()){
             $resp = true;
         }
@@ -200,48 +187,32 @@ class AbmCompra{
         return $colInfo;
     }
 
-    /**
-     * Retorna todos sus obj item
-     * @param array $param
-     * @return array|null
-     */
-    public function buscarItems($param){
-        $where = " true ";
-        
-        if ($param <> NULL){
+     /**
+* Obtiene la compra activa en estado 
+* @return Compra
+*/
+public function buscarCompra($param)
+{
+    $resp = null;
 
-            if  (isset($param['idcompra']))
-                $where .= " and idcompra = '".$param['idcompra']."'";
+    $consulta = "SELECT * FROM compra INNER JOIN compraestado ON compraestado.idcompra = compra.idcompra
+    WHERE idusuario = ".$param['idusuario']." AND idcompraestadotipo = 1 AND cefechafin IS NULL;";
 
-            if  (isset($param['cofecha']))
-                $where.= " and cofecha = '".$param['cofecha']."'";
-
-            if  (isset($param['idusuario']))
-                $where.= " and idusuario = ".$param['idusuario'];
+    if ($this->Iniciar()) {
+        if ($this->Ejecutar($consulta)) {
+            if ($row= $this->Registro()) {
+                $resp = new Compra();
+                $resp->buscar(row["idcompra"]);
+            }
+        } else {
+            $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
         }
-
-        $obj = new CompraItem();
-        $arreglo = $obj->listar($where);
-
-        return $arreglo;
+    } else {
+        $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
     }
 
-      /**
-     * Retorna el carrito de un usuario
-     * @param array $param
-     * @return Compra|null
-     */
-    public function buscarCarritoAbierto($param){
-        $resultado = null;
-
-        if(isset($param["idusuario"])){
-
-            $objCo = new Compra;
-            $resultado = $objCo->buscarCarrito($param);
-        }
-
-        return $resultado;
-    }
+    return $resp;
+}
 
 }
 ?>

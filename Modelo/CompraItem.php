@@ -196,7 +196,7 @@ class CompraItem extends BaseDatos
      * 
      * @return array
      */
-    public function listar($parametro)
+    public function listar($parametro="")
     {
         $arreglo = array();
         $base = new BaseDatos();

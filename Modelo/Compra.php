@@ -74,7 +74,7 @@ class Compra extends BaseDatos{
               $row = $base->Registro();
      
               $objUsuario = new Usuario();
-              $objUsuario->setIdusuario($row['idusuario']);
+              $objUsuario->setIdUsuario($row['idusuario']);
               $objUsuario->cargar();
      
               $this->setear($row['idcompra'], $row['cofecha'], $objUsuario);
@@ -97,8 +97,10 @@ class Compra extends BaseDatos{
 
         $resp = false;
         $base = new BaseDatos();
+        
+        $sql = "INSERT INTO compra(cofecha, idusuario)
+        VALUES ( '".$this->getCoFecha()."' , '". $this->getObjUsuario()->getIdUsuario() ."');";
 
-        $sql = "INSERT INTO compra (cofecha, idusuario) VALUES ('".$this->getCoFecha()."', '".$this->getObjUsuario()->getIdUsuario()."')";
      
         if ($base->Iniciar()) {
           if ($elId = $base->Ejecutar($sql)) {
@@ -201,35 +203,6 @@ class Compra extends BaseDatos{
         return $arreglo;
     }
 
-
-
-   /**
-* Obtiene la compra activa en estado carrito
-* @return Compra
-*/
-public function buscarCarrito($param)
-{
-    $resp = null;
-
-    $idUsuario = $param['idusuario'];
-    $consulta = "SELECT * FROM compra INNER JOIN compraestado ON compraestado.idcompra = compra.idcompra
-    WHERE idusuario = ".$idUsuario." AND idcompraestadotipo = 1 AND cefechafin IS NULL;";
-
-    if ($this->Iniciar()) {
-        if ($this->Ejecutar($consulta)) {
-            if ($row= $this->Registro()) {
-                $resp = new Compra();
-                $resp->buscar(row["idcompra"]);
-            }
-        } else {
-            $this->setMensajeOperacion("compra->buscarCarrito: " . $this->getError());
-        }
-    } else {
-        $this->setMensajeOperacion("compra->buscarCarrito: " . $this->getError());
-    }
-
-    return $resp;
-}
 
 
     /**
