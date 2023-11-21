@@ -220,6 +220,29 @@ class Compra extends BaseDatos{
         return $info;
     }
 
+    public function buscarCompra($param)
+    {
+        $resp = null;
+    
+        $consulta = "SELECT FROM compra INNER JOIN compraestado ON compraestado.idcompra = compra.idcompra
+        WHERE idusuario = ".$param['idusuario']." AND idcompraestadotipo = 1 AND cefechafin IS NULL;";
+    
+        if ($this->Iniciar()) {
+            if ($this->Ejecutar($consulta)) {
+                if ($row= $this->Registro()) {
+                    $resp = new AbmCompra();
+                    $resp->buscar($row["idcompra"]);
+                }
+            } else {
+                $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
+        }
+    
+        return $resp;
+    }
+
 }
 
 ?>

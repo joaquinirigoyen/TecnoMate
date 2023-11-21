@@ -8,6 +8,31 @@ class AbmCompra{
     'cofecha'
     'idusuario' <-- corresponde un objeto Usuario
     */
+    public function abm($datos){
+        $resp = false;
+        if($datos['accion']=='editar'){
+            if($this->modificacion($datos)){
+                $resp = true;
+            }
+        }
+        if($datos['accion']=='borrar'){
+            if($this->baja($datos)){
+                $resp =true;
+            }
+        }
+        if($datos['accion']=='nuevo'){
+            echo "estoy en alta accion nueva";
+            if($this->alta($datos)){
+                echo "hice el alta";
+                $compra = new Compra();
+                $idCompra = $compra->getIdCompra();
+                echo $idCompra;
+            }
+            
+        }
+        return $idCompra;
+
+    }
 
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres 
@@ -187,32 +212,14 @@ class AbmCompra{
         return $colInfo;
     }
 
-     /**
-* Obtiene la compra activa en estado 
-* @return Compra
-*/
-public function buscarCompra($param)
-{
-    $resp = null;
-
-    $consulta = "SELECT * FROM compra INNER JOIN compraestado ON compraestado.idcompra = compra.idcompra
-    WHERE idusuario = ".$param['idusuario']." AND idcompraestadotipo = 1 AND cefechafin IS NULL;";
-
-    if ($this->Iniciar()) {
-        if ($this->Ejecutar($consulta)) {
-            if ($row= $this->Registro()) {
-                $resp = new Compra();
-                $resp->buscar(row["idcompra"]);
-            }
-        } else {
-            $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
-        }
-    } else {
-        $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
+    public function compraActiva($param){
+        $resp = false;
+        $compra = new Compra ();
+        $idCompra = $compra->buscarCompra($param);
+        
+        return $idCompra;
     }
 
-    return $resp;
-}
 
 }
 ?>

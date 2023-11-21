@@ -93,7 +93,7 @@ $this->cefechafin = $cefechafin;
               $objCompra->cargar();
     
               $objCompraEstadoTipo = new CompraEstadoTipo();
-              $objCompraEstadoTipo->setIdCompraEstadoTipo($row['compraestadotipo']);
+              $objCompraEstadoTipo->setIdCompraEstadoTipo($row['idcompraestadotipo']);
               $objCompraEstadoTipo->cargar();
     
               $this->setear($row['idcompraestado'], $objCompra, $objCompraEstadoTipo, $row['cefechaini'], $row['cefechafin']);

@@ -166,4 +166,68 @@ class Session{
        }
        return $exito;
    }
+
+
+
+   /**
+     * Paga el carrito
+     */
+    public function finalizarCompra($colDatos,$idUsuario)
+    {
+        $abmCompra = new AbmCompra();
+        $abmCompraEstado = new AbmCompraEstado();
+        $abmCompraItem = new AbmCompraItem();
+       
+        $arrayConsulta = [];
+        //$carrito = $colDatos['carrito'];
+
+        // Creo un nuevo Compra
+        $arrayConsulta = [];
+        $arrayConsulta["idusuario"] = $idUsuario;
+        $arrayConsulta["cofecha"] = date("Y-m-d H:i:s");
+        $arrayConsulta["accion"] = "nuevo";
+        $resultado = $abmCompra->abm($arrayConsulta);
+
+        // if ($resultado){
+        //     $idCompra = $abmCompra->getId
+        // }
+        // $param["idusuario"] = $idUsuario;
+        // $compraCliente=$abmCompra->buscar($param);
+        $idCompra = $resultado;
+        
+        echo $idCompra;
+      
+        // $exito = $resultado["exito"];
+        // if ($exito) {
+        //     $idCompra = $resultado["id"];
+        // } else {
+        //     $idCompra = "";
+        // }
+
+        $arrayConsultaCE = [];
+       // $arrayConsultaCE["accion"] = "nuevo";
+        $arrayConsultaCE["idcompra"] = $idCompra;
+        $arrayConsultaCE["idcompraestadotipo"] = 1; // guardo 1 ya que es el id de la compra iniciada
+        $arrayConsultaCE["cefechaini"] = date("Y-m-d H:i:s");
+        $arrayConsultaCE["cefechafin"] = "0000-00-00 00:00:00";
+        //$resultado = $abmCompraEstado->abm($arrayConsultaCE);
+        $resultado = $abmCompraEstado->alta($arrayConsultaCE);
+        // Creo el CompraItem
+
+        for ($i = 0; $i < count($colDatos); $i++) {
+            $arrayConsulta = [];
+            $arrayProducto = $colDatos[$i];
+            $idProducto = $arrayProducto["id"];
+            $proCantidad = $arrayProducto["stock"];
+            // compraItem
+            //$arrayConsulta["accion"] = "nuevo";
+            $arrayConsulta["idcompra"] = $idCompra;
+            $arrayConsulta["idproducto"] = $idProducto;
+            $arrayConsulta["cicantidad"] = $proCantidad;
+            $abmCompraItem->alta($arrayConsulta);
+            
+        }
+
+        $this->eliminarCarrito();
+    }
 }

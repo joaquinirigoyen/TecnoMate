@@ -37,7 +37,7 @@ for ($i = 0; $i < count($listaProd); $i++) {
 
     echo "<h5 class='card-title'>" . $listaProd[$i]->getProNombre() . "</h5>";
     echo "<p class='card-text'>Precio: $" . $listaProd[$i]->getProDetalle() . "</p>";   
-
+    echo "<p class='card-text'>Stock disponible:" . $listaProd[$i]->getProCantstock() . "</p>";  
 ?>
     
 <button type='button' class='btn' onclick='enviar(<?php echo $listaProd[$i]->getIdProducto()?>)'><i class='bi bi-cart-plus-fill text-start'></i></button>

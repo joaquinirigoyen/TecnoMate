@@ -16,7 +16,7 @@ echo"<h3>Mi carrito</h3>";
       }
       echo '<a href="carrito.php?item='.$indice.'&accion=sumar">Agregar</a>';
       echo '<a href="carrito.php?item='.$indice.'&accion=restar">Restar</a>';
-      echo '<a href="carrito.php?item='.$indice.'&accion=eliminar">Eliminar Item</a>';;
+      echo '<a href="carrito.php?item='.$indice.'&accion=eliminar">Eliminar Item</a>';
     }
     echo"<h3> Total de compra:$ " .$total."</h3>";
     echo '<a href="homeCliente.php"> Volver</a>';

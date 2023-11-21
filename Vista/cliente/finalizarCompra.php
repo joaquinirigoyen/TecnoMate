@@ -2,18 +2,40 @@
 include_once("../../configuracion.php");
 $objSesion = new Session();
 $idUsuario= $_SESSION['idusuario'] ;
+$colDatos = $_SESSION['carrito'];
+$objCompraItem = new AbmCompraItem();
+$objCompraEstado = new AbmCompraEstado();
+
+foreach ($_SESSION['carrito'] as $indice => $arreglo){
+  foreach($arreglo as $key => $value){
+    $nuevoArray = [];
+    array_push($nuevoArray,$key);
+  }
+}
+
+foreach ($colDatos as $producto => $detalles) {
+  $arregloProductos[] = $detalles;
+}
+
+$objSesion->finalizarCompra($arregloProductos , $idUsuario);
+
+if($objSesion){
+  header ('Location: homeCliente.php');
+}else{
+  echo "hubo un error";
+}
 
 
 
 /* Dar e alta una compra*/
 
-$objCompra = new AbmCompra();
+// $objCompra = new AbmCompra();
 
 
-$fecha=date('Y-m-d h:i:s');
-$param["cofecha"] = $fecha;
-$param["idusuario"] = $idUsuario;
-$respuesta= $objCompra->alta($param);
+// $fecha=date('Y-m-d h:i:s');
+// $param["cofecha"] = $fecha;
+// $param["idusuario"] = $idUsuario;
+// $respuesta= $objCompra->alta($param);
 
 /*if($respuesta ==true){
     echo"di de alta una compra";
@@ -28,30 +50,31 @@ $respuesta= $objCompra->alta($param);
 
 
 
-foreach ($_SESSION['carrito'] as $indice => $arreglo) {
-    $objProducto = new AbmProducto();
-    // echo $indice;
-    $paramC["idusuario"] = $idUsuario;
-    $compraCliente=$objCompra->buscar($paramC);
-   // print_r($compraCliente);
-    $param['pronombre']= $indice;
-    $producto= $objProducto->buscar($param);
-  // print_r($producto) ;
+// foreach ($_SESSION['carrito'] as $indice => $arreglo) {
+//     $objProducto = new AbmProducto();
+//     // echo $indice;
+//     $paramC["idusuario"] = $idUsuario;
+//     $compraCliente=$objCompra->buscar($paramC);
+//    //print_r($compraCliente);
+//     $param['idproducto'] = $indice;
+//     $producto= $objProducto->buscar($param);
+//     print_r($producto) ;
     
-    $paramI['idproducto']= $producto['idproducto'];
-    $paramI['idcompra']= $compraCliente['idcompra'];
-    $paramI['cicantidad']=$arreglo['cant'];
+//     $arrayParamI = [];
+//     $arrayParamI['idproducto']= $producto;
+//     $arrayParamI['idcompra']= $compraCliente['idcompra'];
+//     $pararrayParamIamI['cicantidad']=$arreglo['cant'];
 
 
-    $objCompraItem = new AbmCompraItem();
-    $resp=$objCompraItem ->alta($paramI);
-    if($resp ==true){
-        echo"di de alta una iten";
-    } else if ($resp== false){
-        echo"estoy dando falso";
-    }
+//     $objCompraItem = new AbmCompraItem();
+//     $resp=$objCompraItem ->alta($arrayParamI);
+//     if($resp ==true){
+//         echo"di de alta una iten";
+//     } else if ($resp== false){
+//         echo"estoy dando falso";
+//     }
 
-  }
+//   }
 /*
   if ( $altaIten) {
     echo "La compra se ha realizado correctamente.";
