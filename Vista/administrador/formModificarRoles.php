@@ -1,10 +1,5 @@
 <?php
 include_once("../../configuracion.php");
-include_once '../../Control/AbmUsuarioRol.php';
-include_once '../../Modelo/Conector/BaseDatos.php';
-include_once '../../Modelo/UsuarioRol.php';
-include_once ('../../configuracion.php');
-
 $tituloPagina = "TechnoMate | Administrador";
 include_once '../estructura/headSeguro.php';
 include_once '../estructura/navSeguro.php';

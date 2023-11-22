@@ -37,5 +37,5 @@
     } 
     echo "<script>alert('Rol Modificado');</script>";
     //header ('Location: ../homeAdministrador.php');
-   
+    
 ?>

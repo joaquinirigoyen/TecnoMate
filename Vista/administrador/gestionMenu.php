@@ -50,7 +50,7 @@ $listMenu = $objMenu->buscar(null);
             echo '<td>'.$idMenuPadre.'</td>';
             echo '<td>'.$deshabilitado.'</td>';
             echo '<td>'.'<a class="btn text-white btn-dark text-decoration-none" href="formEditarMenu.php?idmenu='.$idmenu.'">Editar</a>'.
-            '<button class="btn btn-danger text-decoration-none" id="borrar" onclick="abrirModal('. $idmenu .')">Borrar</button>'
+            '<a class="btn text-decoration-none" id="borrar" onclick="abrirModal('. $idmenu .')"><i class="bi bi-trash3-fill p-3" style="font-size: 30px; color: red"></i></a>'
             .'</td>';
             echo '</tr>'; 
         }

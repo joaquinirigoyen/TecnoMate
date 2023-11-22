@@ -12,7 +12,7 @@ include_once("../estructura/navSeguro.php");
                 <img class="imagen-accion" src="../../Archivos/Imagenes/accionAdmin1.png" alt="Crear nuevo usuario">
                 <div class="informacion-accion">
                     <p>CREAR NUEVOS USUARIOS</p>
-                    <button><a class="btn  text-decoration-none"  data-bs-target="#modalNuevoUsuario" tabindex="-1" data-bs-toggle="modal" >Dar Roles</a> </button>
+                    <button><a class="btn  text-decoration-none"  href="crearUsuarios.php">Crear</a> </button>
                 </div>
         </div>
 
@@ -20,8 +20,7 @@ include_once("../estructura/navSeguro.php");
                 <img class="imagen-accion" src="../../Archivos/Imagenes/accionAdmin2.png"
                     alt="Actualizar información de usuario">
                 <div class="informacion-accion">
-                    <p class="text-center">ACTUALIZAR INFORMACIÓN DE USUARIOS, <br>
-                    ASIGNAR ROLES</p>
+                    <p>ACTUALIZAR INFORMACIÓN DE USUARIOS</p>
                     <button><a class="btn  text-decoration-none" href="listarUsuarios.php">Actualizar</a> </button>
                 </div>
         </div>

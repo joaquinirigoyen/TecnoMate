@@ -33,8 +33,8 @@ $objUsuarioRol = new AbmUsuarioRol();
 $colUsuarioRol = $objUsuarioRol->buscar("");
 
 ?>
-
-<div class="container-fluid" style="padding: 50px;">
+<div class="contenido-pagina ">
+<div class="container p-3">
 
     <?php
     if (!empty($colUsuarioRol)){
@@ -42,7 +42,7 @@ $colUsuarioRol = $objUsuarioRol->buscar("");
         echo "<h3>Modificación realizada con éxito a: ".$datos['exito']."!</h3>";
     }
     
-    echo "<h4>Listado de usuarios</h4>";
+    echo "<h4 class='text-center text-white bg-black p-3' >Listado de usuarios</h4>";
     echo "<table class='table table-striped table-hover'>";
     echo "<th>#</th>
     <th>Nombre de Usuario</th>
@@ -66,6 +66,7 @@ $colUsuarioRol = $objUsuarioRol->buscar("");
 
     <a href="./homeAdministrador.php"><input type="submit" value="Volver" class="btn text- white btn-dark">
         </input></a>
+</div>
 </div>
 
 <?php
