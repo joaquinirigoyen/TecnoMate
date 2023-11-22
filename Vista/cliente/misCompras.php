@@ -12,80 +12,101 @@ $objAbmCompraEstado = new AbmCompraEstado();
 $objAbmCompraItem = new AbmCompraItem();
 
 //valida la session
-$param["idusuario"] = $_SESSION['idusuario'];
-echo $_SESSION['idusuario'];
+$idusuario= $_SESSION['idusuario'];
+$param1["idusuario"]= $idusuario;
+//echo $_SESSION['idusuario'];
 //busca el usuario por id
-$usuario = $objUsuario->buscar($param);
+$usuario = $objUsuario->buscar($param1);
 
 // busca las compras del usuario
-$comprasUsuario = $objCompra->buscar($usuario);
+//$comprasUsuario = $objCompra->buscar($usuario);
 
 
 ?>
 
 <div class="contenido-pagina">
-    <h2>Historial de compras del Cliente <?php echo $usuario[0]->getUsNombre()?></h2>
-    <table class="table table-striped table-bordered nowrap" id="tabla">
-        <thead >
-            <tr>  
-              <th><strong>Producto</strong></th>
-              <th><strong>Precio</strong></th>
-              <th><strong>fecha</strong></th>
-              <th><strong>Estado</strong></th>
-              <th><strong>Acciones</strong></th>
-            </tr>
-        </thead>
-
-        <tbody>
+    <h3 class="text-center" >Historial de compras del Cliente <?php echo $usuario[0]->getUsNombre()?></h3>
         <?php 
-        if (count($comprasUsuario)>0){
-            // saca el id de las compras, ColEstados arreglos de arreglos = matriz porq en el buscar le devuelve el arreglo
-            $param["cefechafin"] = "NULL";
-            for ($i=0; $i <count($comprasUsuario) ; $i++) { 
-                $colIdCompra [] = $comprasUsuario[$i]->getIdCompra();
-                $param["idcompra"] = $comprasUsuario[$i]->getIdCompra();
-                $colEstados [] = $objAbmCompraEstado->buscar($param);
-            }
-            
-            
-            $colComprasEstado = $objAbmCompraEstado->buscar($param);
-            //id de compra a travez del compra estado
-            for($i=0; $i < count($colComprasEstado); $i++){
-                $idCompra = $colComprasEstado[$i]->getObjCompra()->getIdCompra();
-                $colIdCompra[] = $idCompra;
-              
-            }
-            
 
-            //recorre los id compras
-            for($i=0; $i < count($colIdCompra); $i++){
-                $param2["idcompra"] = $colIdCompra[$i];
+   // Buscar todas las compra de un usuario.
 
-                $colComprasItems = $objAbmCompraItem->buscar($param2);
-                
-                for($j=0; $j < count($colComprasItems); $j++){
-                    $objTipo = $colEstados[$j][0]->getObjCompraEstadoTipo();
-                    $detalle = $objTipo->getDescripcion();
-                    echo '<tr>';
-                    echo '<td>'.$nombreProducto = $colComprasItems[$j]->getObjProducto()->getProNombre().'</td>';
-                    echo '<td>'.'$'.$nombreProducto = $colComprasItems[$j]->getObjProducto()->getProDetalle().'</td>';
-                    echo '<td>'.$comprasUsuario[$i]->getCoFecha().'</td>';
-                    echo '<td>'.$detalle.'</td>';
-                    echo '<td>'.'deshabilitado'.'</td>';
-                    echo '</tr>'; 
-                }
-        
-            }
+   $param["idusuario"]= $idusuario;
+   $arrayComprasDeUnUsuario= $objCompra->buscar($param);
+   //echo $cantidaCompras=count( $arrayComprasDeUnUsuario);
 
-        }
-        else{
-            echo 'No Realizaste compras por este momento';
-        } 
-        ?>
-        </tbody>
-    </table>
+   foreach ( $arrayComprasDeUnUsuario as $compra) {//recorro
+     
+     
+   echo "
+  
+  <div class='container align-items-center' style='margin-top: 50px;'>
+  
+  <table class='table table-hover table-bordered'>
+    <thead class=''>
+      <thead class='table-dark'>
+        <th colspan='4'scope='col'>idCompra:{$compra->getIdCompra()}</td>
+        <th  scope='col'><button type='button' class='btn  btn-warning' data-bs-toggle='modal' data-bs-target='#historial{$compra->getIdCompra()}'>Editar</button></td>
+      </thead>
+    </thead>
+    
+    ";
+     
+    $param2['idcompra']=$compra->getIdCompra();
+     $arrayComprasItems = $objAbmCompraItem->buscar($param2);
+ 
+     foreach ( $arrayComprasItems as $compraItem) {
+        $idProducto=$compraItem->getObjProducto()->getIdProducto();
+        $getProNombre= $compraItem->getObjProducto()->getProNombre();
+        $precio= $compraItem->getObjProducto()->getProDetalle();
+        $cantidad= $compraItem->getCiCantidad();
+    
+      echo "
+      <tr>
+        <td>{$compraItem->getObjProducto()->getIdProducto()}</td>
+        <td>{$compraItem->getObjProducto()->getProNombre()}</td>
+        <td>{$compraItem->getObjProducto()->getProDetalle()}</td>
+        <td>{$compraItem->getCiCantidad()}</td>
+      </tr>";
+      }
+ 
+      $param['idcompra']=$compra->getIdCompra();
+      $objAbmCompraEstado = new AbmCompraEstado();
+      $arrayCompraEstados=  $objAbmCompraEstado->buscar($param);
+  
+  echo "
+ <table class='table table-hover table-bordered'>
+  <thead>
+    <th>estado</th>
+    <th>fechaIni</th>
+    <th>fechaFinal</th>
+  </thead>
+  <tbody>
+  
+  ";
+   /*Buscar los estados de las compras*/
+  foreach (  $arrayCompraEstados as $compraEstados) {
+  
+ echo"
+    <tr>
+      <td>{$compraEstados->getObjCompraEstadoTipo()->getDescripcion()}</td>
+      <td>{$compraEstados->getCeFechaIni()}</td>
+      <td>{$compraEstados->getCeFechaFin()}</td>      
+    </tr>
+  ";
+}
+
+echo"
+</tbody>
+</table>
+";
+}
+     echo "
+     </tbody>
+   </table>
+   </div>
 </div>
-
-<?php
-include_once("../estructura/footer.php");
+   ";
+ 
+include_once("../estructura/footer.php");  
 ?>
+

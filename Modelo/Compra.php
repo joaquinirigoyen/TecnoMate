@@ -85,7 +85,39 @@ class Compra extends BaseDatos{
         }
         return $resp;
     }
+ /**
+     * Busca una compra por id.
+     * Coloca su datos al objeto actual.
+     * @param int $id
+     * @return boolean
+     */
+    public function buscar($id){
+     // print_r($id);
+      echo"entro al buscar compra";
+      $encontro = false;
+      $base = new BaseDatos();
+      $consulta = "SELECT * FROM compra WHERE idcompra = '" . $id . "'";
 
+      if( $base->Iniciar()){
+          if( $base->Ejecutar($consulta)){
+              if($fila = $base->Registro()){
+                  $objUsuario = new Usuario();
+                  $objUsuario->buscar($fila["idusuario"]);
+                  //print_r( $objUsuario);
+
+                  $this->setear(
+                      $fila["idcompra"],
+                      $fila["cofecha"],
+                      $objUsuario
+                  );
+
+                  $encontro = true;
+              }
+          }else{$this->setMensajeOperacion("Compra->buscar: ".$this->getError());}
+      }else{$this->setMensajeOperacion("Compra->buscar: ".$this->getError());}
+
+      return $encontro;
+  }
   /**
      * Esta función lee los valores actuales de los atributos del objeto e inserta un nuevo
      * registro en la base de datos a partir de ellos.
@@ -220,18 +252,25 @@ class Compra extends BaseDatos{
         return $info;
     }
 
-    public function buscarCompra($param)
+    public function buscarCompraActiva()
     {
+     // echo"entro a buscar compra";
+      $base = new BaseDatos();
+
         $resp = null;
-    
-        $consulta = "SELECT FROM compra INNER JOIN compraestado ON compraestado.idcompra = compra.idcompra
-        WHERE idusuario = ".$param['idusuario']." AND idcompraestadotipo = 1 AND cefechafin IS NULL;";
-    
-        if ($this->Iniciar()) {
-            if ($this->Ejecutar($consulta)) {
-                if ($row= $this->Registro()) {
-                    $resp = new AbmCompra();
-                    $resp->buscar($row["idcompra"]);
+      
+       $consulta = "SELECT * FROM compra INNER JOIN compraestado ON compraestado.idcompra = compra.idcompra
+        WHERE idusuario = ".$this->getObjUsuario()->getIdUsuario()." AND idcompraestadotipo = 1 ;";
+
+        if ( $base ->Iniciar()) {
+        //  echo"entro a iniciar";
+            if ( $base->Ejecutar($consulta)) {
+            //  echo"entro a ejecutar";
+                if ($row= $base->Registro()) {
+              //    echo"entro a registro";
+                    $resp = new Compra();
+                    $resp=$row["idcompra"];
+                  //  echo $resp;
                 }
             } else {
                 $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
@@ -242,6 +281,34 @@ class Compra extends BaseDatos{
     
         return $resp;
     }
+
+    public function buscarUltimaCompra()
+    {
+      $base = new BaseDatos();
+     // print_r($param);
+      //echo 'entro a buscar ultima compra';
+        $resp = null;
+      
+       $consulta = "SELECT MAX(idcompra)  FROM compra;";
+    
+        if ( $base ->Iniciar()) {
+       // echo 'entro A iniciar';
+            if ( $base->Ejecutar($consulta)) {
+          //  echo 'entro A ejecutar';
+                if ($row= $base->Registro()) {
+                   // echo 'entro A REGISTRO';
+                    $resp=$row[0];
+                }
+            } else {
+                $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("compra->buscarCompra: " . $this->getError());
+        }
+    
+        return $resp;
+    }
+
 
 }
 

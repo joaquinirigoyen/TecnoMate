@@ -3,7 +3,6 @@ include_once '../../configuracion.php';
 include_once '../estructura/headSeguro.php';
 include_once("../estructura/navSeguro.php");
 
-//$cod=$_REQUEST['codigo'];
 $cod=$_GET["codigo"];
 //echo $cod;
 $param['idproducto']=$cod;
@@ -22,7 +21,8 @@ $listaProd=$objProducto->buscar($param);
     $stock = $listaProd[0]->getProCantstock();
 
 ?>
-<div class="container p-3 ">
+<div class="container p-3 " style="display: flex; justify-content: center; align-items: center;">
+
 <form  method='post' action="detalleProducto.php?codigo=<?php echo $cod?>">
 <div class="card w-75 mb-3">
   <div class="row g-0">
@@ -31,19 +31,19 @@ $listaProd=$objProducto->buscar($param);
     </div>
     <div class="col-md-8">
       <div class="card-body">
-         <label  class="col-form-label">Nombre Producto</label>
+         <label  class="col-form-label"><strong>Nombre Producto</strong></label>
          <input class="form-control form-control-sm " type='hidden' name='id' value="<?php echo $cod ?>">
 
          <input class="form-control form-control-sm" type='text'  name='nombre'  value="<?php echo $nombre ?>" readonly>
 
-         <label  class="col-form-label">Precio</label>
+         <label  class="col-form-label"><strong>Precio</strong></label>
          <input class="form-control form-control-sm" type='text'  name='precio'  value="<?php echo $precio ?>" readonly>
 
-         <label  class="col-form-label">Stock</label>
+         <label  class="col-form-label"><strong>Stock</strong></label>
          <input class="form-control form-control-sm" type='text'  name='stock'  value="<?php echo $stock ?>" readonly>
 
-         <label for="cantidad"  class="col-form-label">Selecione Cantidad</label>
-         <input type="number"  name="cant"  value="1" class="form-control form-control-sm">
+         <label for="cantidad"  class="col-form-label"><strong>Selecione Cantidad</strong></label>
+         <input type="number"  name="cant"  value="1" min="1" max="<?php echo $stock ?>" class="form-control form-control-sm">
 
          <p class="card-text"><small class="text-body-secondary">Si esta seguro puede continuar</small></p>
          <button class="btn btn-dark"><input type="submit" value="Agregar Producto" name="btnAgregar"></button>
@@ -55,7 +55,6 @@ $listaProd=$objProducto->buscar($param);
 </div>
 <?php
     include_once("../estructura/footer.php");
-    //<script src="../js/cargarCarrito.js"></script>
 
   if(isset($_REQUEST["btnAgregar"])){
         $id= $_REQUEST["id"];
@@ -69,14 +68,12 @@ $listaProd=$objProducto->buscar($param);
 			} else {
 				$cantidad=$_REQUEST['cant'];
 			}
-       // echo "producto ". $producto;
-      // $_SESSION["carrito"][$producto]["id"]=  $id;
       $_SESSION["carrito"][$producto]["id"]=  $id;
       $_SESSION["carrito"][$producto]["precio"]=  $precio;
       $_SESSION["carrito"][$producto]["stock"]=  $stock;
       $_SESSION["carrito"][$producto]["cant"]= $cantidad;
 
-  echo "<script>alert('Producto cargado con exito');</script>";
+   echo "<script>alert('Producto cargado con exito');</script>";
   header("location: homeCliente.php");
 
     }

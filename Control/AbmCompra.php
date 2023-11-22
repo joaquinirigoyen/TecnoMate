@@ -21,16 +21,15 @@ class AbmCompra{
             }
         }
         if($datos['accion']=='nuevo'){
-            echo "estoy en alta accion nueva";
+        //    echo "estoy en alta accion nueva";
             if($this->alta($datos)){
-                echo "hice el alta";
-                $compra = new Compra();
-                $idCompra = $compra->getIdCompra();
-                echo $idCompra;
+              //  echo "hice el alta";
+               // $compra = new Compra();
+               // $idCompra = $compra->getIdCompra();
             }
             
         }
-        return $idCompra;
+        return $resp;
 
     }
 
@@ -213,13 +212,33 @@ class AbmCompra{
     }
 
     public function compraActiva($param){
-        $resp = false;
-        $compra = new Compra ();
-        $idCompra = $compra->buscarCompra($param);
-        
-        return $idCompra;
+        //echo"entro a compra activa";
+       // print_r($param) ;
+        if(isset($param["idusuario"])){
+            $obj = new Usuario;
+            $obj->buscar($param["idusuario"]);
+          //print_r( $obj);
+
+            $objCo = new Compra;
+            $objCo->setObjUsuario($obj);
+            //print_r($objCo);
+            $resultado = $objCo->buscarCompraActiva();
+           // echo $resultado;
+        }
+
+        return $resultado;
     }
 
 
-}
+    /* ESTA FUNCION busca la ulltima compra cargada*/
+    public function ultimaCompra(){
+   
+            $objCo = new Compra;
+            $resultado = $objCo->buscarUltimaCompra();
+            return $resultado;
+        }
+
+      
+    }
+
 ?>

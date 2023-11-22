@@ -51,7 +51,7 @@ $(document).ready(function () {//cada vez que hay na modificacion en el html se 
             //funcion ajax que permite mandar informacion desde js a php
             $.ajax({ 
                 //parametros
-                url: "../../Control/Ajax/altaProducto.php", //donde mandar los datos
+                url: "../deposito/accion/darDeAltaProductos.php", //donde mandar los datos
                 type: "POST", // que tipo de formato se manda la informacion (POST/GET)
                 dataType: "json",//el tipo de formato en el que se espera una respuesta(ver prueba.php y pruebajson.php en ajax antigue)
                 data: formData,//los datos del formulario que uno va a mandar en formato json

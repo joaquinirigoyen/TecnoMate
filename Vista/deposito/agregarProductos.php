@@ -44,4 +44,4 @@
     </div>
   </div>
 </div>
-<script src="../estructura/js/altaProducto.js"></script>
+<script src="../js/altaProducto.js"></script>

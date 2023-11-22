@@ -167,66 +167,59 @@ class Session{
        return $exito;
    }
 
-
-
    /**
      * Paga el carrito
      */
-    public function finalizarCompra($colDatos,$idUsuario)
-    {
+    public function finalizarCompra($colDatos,$idUsuario){
         $abmCompra = new AbmCompra();
         $abmCompraEstado = new AbmCompraEstado();
         $abmCompraItem = new AbmCompraItem();
-       
-        $arrayConsulta = [];
-        //$carrito = $colDatos['carrito'];
 
-        // Creo un nuevo Compra
-        $arrayConsulta = [];
-        $arrayConsulta["idusuario"] = $idUsuario;
-        $arrayConsulta["cofecha"] = date("Y-m-d H:i:s");
-        $arrayConsulta["accion"] = "nuevo";
-        $resultado = $abmCompra->abm($arrayConsulta);
-
-        // if ($resultado){
-        //     $idCompra = $abmCompra->getId
-        // }
-        // $param["idusuario"] = $idUsuario;
-        // $compraCliente=$abmCompra->buscar($param);
-        $idCompra = $resultado;
         
-        echo $idCompra;
-      
-        // $exito = $resultado["exito"];
-        // if ($exito) {
-        //     $idCompra = $resultado["id"];
-        // } else {
-        //     $idCompra = "";
-        // }
+              $param['idusuario']=$idUsuario;
+             //echo $idUsuario;
+              $idCompra=$abmCompra->compraActiva($param);
+             //echo $idCompra;
+              if ( $idCompra == null){
+                $fechaC=date("Y-m-d H:i:s");
+                $arrayConsulta = [];
+                $arrayConsulta["idusuario"] = $idUsuario;
+                $arrayConsulta["cofecha"] =   $fechaC;
+                $arrayConsulta["accion"] = "nuevo";
+                $resultado = $abmCompra->abm($arrayConsulta);
+                $ultimaCompra =$abmCompra->ultimaCompra();
+                //echo  $ultimaCompra;
+                $idCompra= $ultimaCompra;
 
-        $arrayConsultaCE = [];
-       // $arrayConsultaCE["accion"] = "nuevo";
-        $arrayConsultaCE["idcompra"] = $idCompra;
-        $arrayConsultaCE["idcompraestadotipo"] = 1; // guardo 1 ya que es el id de la compra iniciada
-        $arrayConsultaCE["cefechaini"] = date("Y-m-d H:i:s");
-        $arrayConsultaCE["cefechafin"] = "0000-00-00 00:00:00";
-        //$resultado = $abmCompraEstado->abm($arrayConsultaCE);
-        $resultado = $abmCompraEstado->alta($arrayConsultaCE);
+              /* Crear un CompraEstado, con el tipo de estado siendo Iniciada*/
+                $arrayConsultaE = [];
+                 $arrayConsultaE["idcompra"] = $idCompra;
+                $arrayConsultaE["idcompraestadotipo"] = 1; // guardo 1 ya que es el id de la compra iniciada
+                  $arrayConsultaE["cefechaini"] = $fechaC;
+                  $arrayConsultaE["cefechafin"] = NULL;
+               // $resultado = $abmCompraEstado->abm($arrayConsultaE);
+                  $resultado = $abmCompraEstado->alta($arrayConsultaE);
+              } else if($idCompra != null){
+                $idCompra=$idCompra;
+              }
+            
+
+
         // Creo el CompraItem
 
         for ($i = 0; $i < count($colDatos); $i++) {
+            print_r($colDatos);
             $arrayConsulta = [];
             $arrayProducto = $colDatos[$i];
             $idProducto = $arrayProducto["id"];
-            $proCantidad = $arrayProducto["stock"];
-            // compraItem
-            //$arrayConsulta["accion"] = "nuevo";
+            $proCantidad = $arrayProducto["cant"];
             $arrayConsulta["idcompra"] = $idCompra;
             $arrayConsulta["idproducto"] = $idProducto;
             $arrayConsulta["cicantidad"] = $proCantidad;
             $abmCompraItem->alta($arrayConsulta);
             
         }
+ 
 
         $this->eliminarCarrito();
     }

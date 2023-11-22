@@ -1,17 +1,14 @@
 <?php
-include_once("../../../configuracion.php");
-include_once '../../../Control/AbmUsuario.php';
-include_once '../../../Modelo/Conector/BaseDatos.php';
-include_once '../../../Modelo/Usuario.php';
+include_once("../../configuracion.php");
 
-$tituloPagina = "TechnoMate | Administrador";
-include_once '../../estructura/headSeguro.php';
+$tituloPagina = "TechnoMate | Deposito";
+include_once '../estructura/headSeguro.php';
 
 $objSesion = new Session();
 
 if ($objSesion->validar()){
     if($_SESSION['rol'] == 2){
-        include_once '../../estructura/navSeguro.php';
+        include_once '../estructura/navSeguro.php';
     } else {
         header('Location: homeDeposito.php');
     }
@@ -70,7 +67,7 @@ if (!empty($colProductos)){
     </div>
 
 <?php
-include_once '../../estructura/footer.php';
+include_once ("../estructura/footer.php");
 ?>
 <script>
     var resultado = document.getElementById("mostrar");
@@ -90,7 +87,7 @@ include_once '../../estructura/footer.php';
             }
         }
 
-        xmlhttp.open("GET", "formActualizar.php?codigo=" + codigo, true);
+        xmlhttp.open("GET", "administrarProductos.php?codigo=" + codigo, true);
         xmlhttp.send();
 
     }

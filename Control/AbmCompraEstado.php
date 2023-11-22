@@ -1,61 +1,7 @@
 <?php
 class AbmCompraEstado{
 
-    public function abm($datos){
-        $resp = false;
-        if($datos['accion']=='editar'){
-            if($this->modificacion($datos)){
-                $resp = true;
-            }
-        }
-        if($datos['accion']=='borrar'){
-            if($this->baja($datos)){
-                $resp =true;
-            }
-        }
-        if($datos['accion']=='nuevo'){
-            if($this->alta($datos)){
-                $resp =true;
-            }
-            
-        }
-        return $resp;
-
-    }
-
-     /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
-     * @param array $param
-     * @return CompraEstado
-     */
-    // private function cargarObjeto ($param){
-    //     $obj = null;
-    //     if (array_key_exists('idcompraestado',$param) and array_key_exists('idcompra',$param) and
-    //         array_key_exists('idcompraestadotipo',$param) and array_key_exists('cefechaini',$param) and 
-    //         array_key_exists('cefechafin',$param))
-    //     {
-    //         $obj = new CompraEstado();
-    //         $abmCompra = new AbmCompra ();
-    //         $abmCompraEstadoTipo = new AbmCompraEstadoTipo();
-    //         $arrayCompra = [];
-    //         $arrayCompraEstadoTipo = [];
-    //         $arrayCompra ['idcompra'] = $param['idcompra'];
-    //         $arrayCompraEstadoTipo ['idcompraestadotipo'] = $param['idcompraestadotipo']; // Modificado!!!
-    //         // MODIFICADO!!!
-    //         $listaCompras = $abmCompra -> buscar ($arrayCompra);
-    //         $listaCompraEstadoTipo = $abmCompraEstadoTipo -> buscar ($arrayCompraEstadoTipo);
-    //        // print_r($listaCompraEstadoTipo);
-    //         $objCompra = $listaCompras[0];
-    //         $objCompraEstadoTipo = $listaCompraEstadoTipo[0];
-    //         // MODIFICADO!!!
-    //         $idCompraEstado = $param ['idcompraestado'];
-    //         $ceFechaIni = $param ['cefechaini'];
-    //         $ceFechaFin = $param ['cefechafin'];
-
-    //         $obj -> setear($idCompraEstado, $objCompra, $objCompraEstadoTipo, $ceFechaIni, $ceFechaFin);
-    //     }
-    //     return $obj;
-    // }
+ 
     private function cargarObjeto($param){
         $objEstado = null;
         //print_r($param);
@@ -118,6 +64,7 @@ class AbmCompraEstado{
      * @param array $param
      */
     public function alta($param){
+       // echo 'entro al alta';
         $param['idcompraestado'] = null; 
         $resp = false;
         $unObjCompraEstado = $this->cargarObjeto($param);

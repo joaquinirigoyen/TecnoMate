@@ -101,6 +101,36 @@ class Usuario {
         return $resp;
       
     }
+    
+    /**
+     * Busca un usuario por id
+     * Sus datos son colocados en el objeto
+     * @param string $id
+     * @return boolean true si encontro, false caso contrario
+     */
+    public function buscar($id){
+        $base = new BaseDatos();
+        $encontro = false;
+        $consulta = "SELECT * FROM usuario WHERE idusuario = '" . $id . "'";
+
+        if($base->Iniciar()){
+            if($base->Ejecutar($consulta)){
+                if($fila = $base->Registro()){
+                    $this->setear(
+                        $id,
+                        $fila["usnombre"],
+                        $fila["uspass"],
+                        $fila["usmail"],
+                        $fila["usdeshabilitado"]
+                    );
+
+                    $encontro = true;
+                }
+            }else{$this->setMensajeoperacio("Usuario->buscar: ".$this->getError());}
+        }else{$this->setMensajeoperacio("Usuario->buscar: ".$this->getError());}
+
+        return $encontro;
+    }
 
     /**
      * Esta función lee los valores actuales de los atributos del objeto e inserta un nuevo

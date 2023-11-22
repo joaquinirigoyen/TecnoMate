@@ -1,9 +1,8 @@
 <?php
-$tituloPagina = "TechnoMate | Administrador";
-include_once '../estructura/secciones/head.php';
-include("../estructura/secciones/nav-bar-1.php");
-require_once("../../Modelo/Conector/BaseDatos.php");
 include_once("../../configuracion.php");
+$tituloPagina = "TechnoMate | Administrador";
+include_once '../estructura/headSeguro.php';
+include_once '../estructura/navSeguro.php';
 
 $objMenu = new AbmMenu();
 $objMenuRol = new AbmMenuRol();//vinculo entre el menu y el rol
@@ -13,15 +12,17 @@ $listMenu = $objMenu->buscar(null);
 ?>
 <script src="../estructura/js/menus.js"></script>
 <div class="contenido-pagina">
+  <div class="container p-3">
     <button><i class="bi bi-database-fill-add"></i></button>
-    <button> <a href="formCrearNuevoRol.php">Crear un Nuevo Rol</a> </button>
-    <button> <a href="formAccesoRol.php"></a> Acceso Rol</button>
-    <button> <a href="fromCrearNuevoItemMenu.php">Crear un Nuevo Item Menu</a> </button>
+    <a class="btn  btn-secondary  text-decoration-none" href="formCrearNuevoRol.php">Crear un Nuevo Rol</a>
+    <a class="btn btn-secondary text-decoration-none" href="formAccesoRol.php">Ver Roles</a> 
+    <a class="btn  btn-secondary text-decoration-none" href="fromCrearNuevoItemMenu.php">Crear un Nuevo Item Menu</a>
+ </div>
     <?php 
     if (count($listMenu)>0){
-        echo '<table class="table">
+        echo '<table class="table table-striped  table-hover">
         <thead >
-            <tr>  
+            <tr class="table-dark">  
               <th><strong>IdMenu</strong></th>
               <th><strong>menombre</strong></th>
               <th><strong>medescripcion</strong></th>
@@ -48,8 +49,8 @@ $listMenu = $objMenu->buscar(null);
             echo '<td>'.$objM->getMeDescripcion().'</td>';
             echo '<td>'.$idMenuPadre.'</td>';
             echo '<td>'.$deshabilitado.'</td>';
-            echo '<td>'.'<button class="btn text-white btn-dark"><a href="formEditarMenu.php?idmenu='.$idmenu.'">Editar</a></button>'.
-            '<button class="btn btn-danger" id="borrar" onclick="abrirModal('. $idmenu .')">Borrar</button>'
+            echo '<td>'.'<a class="btn text-white btn-dark text-decoration-none" href="formEditarMenu.php?idmenu='.$idmenu.'">Editar</a>'.
+            '<button class="btn btn-danger text-decoration-none" id="borrar" onclick="abrirModal('. $idmenu .')">Borrar</button>'
             .'</td>';
             echo '</tr>'; 
         }
@@ -80,3 +81,6 @@ $listMenu = $objMenu->buscar(null);
     </div>
   </div>
 </div>
+<?php
+include_once '../estructura/footer.php';
+?>

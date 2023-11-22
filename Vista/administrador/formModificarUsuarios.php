@@ -1,17 +1,14 @@
 <?php
 include_once("../../configuracion.php");
-include_once '../../Control/AbmUsuario.php';
-include_once '../../Modelo/Conector/BaseDatos.php';
-include_once '../../Modelo/Usuario.php';
-include_once ('../../configuracion.php');
+$tituloPagina = "TechnoMate | Administrador";
+include_once '../estructura/headSeguro.php';
+include_once '../estructura/navSeguro.php';
+
 
 $idUsuario = data_submitted();
 $objUsuario = new AbmUsuario();
 $usuario = $objUsuario->buscar($idUsuario);
 
-$tituloPagina = "TechnoMate | Administrador";
-include_once '../estructura/headSeguro.php';
-include_once '../estructura/navSeguro.php';
 
 /* $objSesion = new Session();
 

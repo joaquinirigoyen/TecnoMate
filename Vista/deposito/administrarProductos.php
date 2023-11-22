@@ -17,7 +17,7 @@ $producto=$objProducto->buscar($param);
           
           <div class="contenedor-dato">
           <label class="form-label">ID de producto</label>
-          <input class="form-control" type="text" name="idproducto" id="idproducto" value="<?php echo $producto[0]->getIdProducto() ?>" ></input><br>
+          <input class="form-control" type="text" name="idproducto" id="idproducto" value="<?php echo $producto[0]->getIdProducto() ?>" readonly></input><br>
           </div>
           <br>
           <div class="contenedor-dato">
@@ -33,7 +33,7 @@ $producto=$objProducto->buscar($param);
           <br>
           <div class="contenedor-dato">
           <label for="procantstock"  class="form-label">Cantidad de Stock</label>
-                <input type="number" class="form-control" id="procantstock" name="procantstock" placeholder="" required>
+                <input type="number" class="form-control" min="0" id="procantstock" name="procantstock" placeholder="" required>
           </div>
           <br>
           <div class="contenedor-dato">
@@ -46,4 +46,4 @@ $producto=$objProducto->buscar($param);
           </div>
         </form>
     
-<script src="../estructura/js/modifarProducto.js"></script>
+<script src="../js/modifarProducto.js"></script>

@@ -40,12 +40,14 @@ if ($objSesion->validar()){
             <img class="imagen-accion" src="../../Archivos/Imagenes/accionDeposito3.png" alt="Administrar roles">
             <div class="informacion-accion">
                 <p>PRODUCTOS EXISTENTES</p>
-                <button><a class="btn  text-decoration-none" href="accion/listarProductos.php">MODIFICAR</a> </button>
+                <button><a class="btn  text-decoration-none" href="listarProductos.php">MODIFICAR</a> </button>
             </div>
         </div>
     </div>
 
 </div>
 <?php
+ include_once("agregarProductos.php");
 include_once ("../estructura/footer.php");
 ?>
+<script src="../js/altaProducto.js"></script>
