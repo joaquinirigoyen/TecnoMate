@@ -32,7 +32,7 @@ if ($objSesion->validar()){
             <img class="imagen-accion" src="../../Archivos/Imagenes/accionDeposito2.png" alt="Actualizar información de usuario">
             <div class="informacion-accion">
                 <p>ESTADOS DE COMPRAS</p>
-                <button><a class="nav-link" href="../deposito/admComprasphp">Administrar</a></button>
+                <button><a class="nav-link" href="listaCompras.php">Administrar</a></button>
             </div>
         </div>
 

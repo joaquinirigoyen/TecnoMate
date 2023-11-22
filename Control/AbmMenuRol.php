@@ -204,6 +204,8 @@ class AbmMenuRol{
 
         return $colInfo;
     }
+
+
 }
 
 ?>
