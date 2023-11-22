@@ -4,8 +4,7 @@ class Session{
     //IMPLEMENTAR TIENE PERMISOS
 
     /*_ _construct(). Constructor que. Inicia la sesión.*/
-    public function __construct()
-    {
+    public function __construct() {
         if(!array_key_exists('idusuario', $_SESSION)){
             session_start();
         }
@@ -14,8 +13,7 @@ class Session{
     /**
      * iniciar($nombreUsuario,$psw). Actualiza las variables de sesión con los valores ingresados.
      */
-    public function iniciar($nombreUsuario, $psw)
-    {
+    public function iniciar($nombreUsuario, $psw){
         $resp = false;
         $objAbmUsuario = new AbmUsuario();
 
@@ -61,9 +59,8 @@ class Session{
         return $resp;
     }
 
-    /*validar(). Valida si la sesión actual tiene usuario y psw válidos. Devuelve true o false.*/
-    public function validar()
-    {
+    /**validar(). Valida si la sesión actual tiene usuario y psw válidos. Devuelve true o false.*/
+    public function validar(){
         $resp = false;
         if ($this->activa() && isset($_SESSION['idusuario'])){
             $resp = true;
@@ -72,8 +69,7 @@ class Session{
     }
 
     /*activa(). Devuelve true o false si la sesión está activa o no. */
-    public function activa()
-    {
+    public function activa() {
         $resp = false;
         if (php_sapi_name() !== 'cli'){
             if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
@@ -86,8 +82,7 @@ class Session{
     }
 
     /**Devuelve el usuario logeado*/
-    public function getUsuario()
-    {
+    public function getUsuario()  {
        $usuario = null;
        if ($this->validar()){
         $obj = new AbmUsuario();
@@ -101,8 +96,7 @@ class Session{
     }
 
     /**devuelve el rol del usuario logeado */
-    public function getRol()
-    {
+    public function getRol() {
         $rol = null;
         if ($this->validar()){
          $obj = new AbmUsuario();
@@ -135,7 +129,7 @@ class Session{
      * Funcion que verfica si un usuario tiene permisos.
      * Retorna false si no los tiene o una lista de los menus si tiene los roles
      */
-    public function vericarPermisos(){
+    public function verificarPermisos(){
         $resp = false;
         $param['idpadre']  = $_SESSION['rol'];//guarda el rol de la session. el 3 corresponde a clientes, 2 a deposito, 1 a administrador
         $menu = new AbmMenu();//se crea un objeto menu
@@ -145,6 +139,35 @@ class Session{
         }
         return $resp;
     }
+
+    public function permisos() {
+        // Obtén el rol actual del usuario desde la sesión
+        $rolUsuario = $_SESSION['rol'];
+    
+        // Obtén la URI solicitada
+        $uriSolicitada = strtolower(trim($_SERVER['REQUEST_URI']));
+    
+        // Define los permisos permitidos para cada rol (ajusta según tus necesidades)
+        $permisos = [
+            '3' => ['/tp-finalpwd-grupo2a/vista/cliente/'],
+            '2' => ['/tp-finalpwd-grupo2a/vista/deposito/'],
+            '1' => ['/tp-finalpwd-grupo2a/vista/administrador/'],
+        ];
+    
+        // Verifica si la URI solicitada está permitida para el rol actual
+        $permitido = false;
+        foreach ($permisos[$rolUsuario] as $rutaPermitida) {
+            $rutaPermitida = strtolower(trim($rutaPermitida));
+    
+            //Verifica si la URI solicitada comienza con la ruta permitida
+            if (strpos($uriSolicitada, $rutaPermitida) === 0) {
+                $permitido = true;
+                break;
+            }
+        }
+        return $permitido;
+    }
+    
 
     /**cierra la sesion actual */
     public function cerrar()

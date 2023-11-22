@@ -12,21 +12,22 @@
             </div>
             <div class="collapse navbar-collapse menuUsuario" id="navbar-Toggler">
                 <ul class="navbar-nav d-flex justify-content-center align-items-center">
-                    <?php
-                        for ($i = 0; $i < count($listaMenu); $i++) {
-                            if ($listaMenu[$i]->getMeDeshabilitado() == null) {
+                <?php
+                 for ($i = 0; $i < count($listaMenu); $i++) {
+                    if ($listaMenu[$i]->getMeDeshabilitado() == null) {
 
-                                /*lee los datos de los menues cargados*/
-                                $ruta = $listaMenu[$i]->getMeDescripcion();
-                                $nombre = $listaMenu[$i]->getMeNombre();
+                        /*lee los datos de los menues cargados*/
+                        $ruta = $listaMenu[$i]->getMeDescripcion();
+                        $nombre = $listaMenu[$i]->getMeNombre();
 
-                                if ($nombre == 'iconoCarrito') {/*espara que coloque el icono carrito*/
-                                    $nombre = "<i class='bi bi-cart-plus-fill '></i>";
-                                }
-                                echo '<li class="nav-item mx-2 flex-grow-1"> <a class="nav-link" aria-current="page" href=' . $ruta . '>' . $nombre . '</a> </li>'; // acomoda los menues en lista
-                            }
+                        if ($nombre == 'iconoCarrito') {/*espara que coloque el icono carrito*/
+                            $nombre = "<i class='bi bi-cart-plus-fill '></i>";
                         }
+                        echo '<li class="nav-item mx-2 flex-grow-1"> <a class="nav-link" aria-current="page" href=' . $ruta . '>' . $nombre . '</a> </li>'; // acomoda los menues en lista
+                    }
+                }
                     ?>
+
                     <ul class="nav menuUsuario2">
                         <li class="dropdown row">
 
