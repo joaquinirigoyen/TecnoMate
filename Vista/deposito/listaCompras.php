@@ -1,10 +1,12 @@
 <?php
-$dir="";
-$titulo = "Supervisar compras";
-include_once("../estructura/headSeguro.php");
-//include_once '../../configuracion.php';
 
+include_once("../../configuracion.php");
+$tituloPagina = "TechnoMate | Supervisar Compras";
+include_once("../estructura/headSeguro.php");
+include_once("../estructura/navSeguro.php");
 ?>
+
+
 
 <script type="text/javascript" src="../js/compra/listaCompras.js"></script>
 
