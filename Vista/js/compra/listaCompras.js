@@ -11,6 +11,7 @@ function cargarCompra(idcompra,idcompraestado,idusuario ,idcompraestadotipo){
       $('#BotonAceptar').show();
       $('#BotonCancelar').hide();
       $('#BotonEnviar').hide();
+      $('#editarProducto').hide();
     }
     if(idcompraestadotipo==2){
       $('#BotonAceptar').hide();
@@ -29,7 +30,45 @@ function cargarCompra(idcompra,idcompraestado,idusuario ,idcompraestadotipo){
     }
   });
 }
-    
+
+function editarProducto(idcompra,idcompraestado,idcompraestadotipo) {
+  
+  //Ocultar modal
+  let registro = { idcompraestado:idcompraestado, idcompraestadotipo:idcompraestadotipo, idcompra:idcompra}
+  var genericModalEl = document.getElementById('exampleModal')
+  var modal = bootstrap.Modal.getInstance(genericModalEl)
+  $.ajax({
+    type: 'POST',
+    url:'accion/editar_producto.php',
+    data: registro,
+    complete: function (xhr, textStatus) {
+      //se llama cuando se recibe la respuesta (no importa si es error o éxito)
+      console.log("La respuesta regreso")
+    },
+    success: function(msg) {
+      console.log(msg);
+
+      // Espera a que el documento esté listo
+      $(document).ready(function() {
+      // Maneja el clic en el botón dentro del modal
+        $('.cerraryRecargar').on("click", function() {
+        // Cierra el modal
+        $("#exampleModal").modal("hide");
+        // Recarga la página
+        location.reload(true);
+      });
+    });
+  },
+  error: function (xhr, textStatus, errorThrown) {
+    //called when there is an error
+    console.error("Error en la solicitud Ajax: " + textStatus + " - " + errorThrown);
+    console.log(xhr.responseText);//muestra en la consola del navegador todos los errores
+    //console.error(xhr);
+    //console.error(textStatus);
+    //console.error(errorThrown);
+  }
+  });
+}
 
 function cambiarEstado(idcompra,idcompraestado,idcompraestadotipo) {
   
@@ -40,6 +79,45 @@ function cambiarEstado(idcompra,idcompraestado,idcompraestadotipo) {
   $.ajax({
     type: 'POST',
     url:'accion/agregar_estado.php',
+    data: registro,
+    complete: function (xhr, textStatus) {
+      //se llama cuando se recibe la respuesta (no importa si es error o éxito)
+      console.log("La respuesta regreso")
+    },
+    success: function(msg) {
+      console.log(msg);
+
+      // Espera a que el documento esté listo
+      $(document).ready(function() {
+      // Maneja el clic en el botón dentro del modal
+        $('.cerraryRecargar').on("click", function() {
+        // Cierra el modal
+        $("#exampleModal").modal("hide");
+        // Recarga la página
+        location.reload(true);
+      });
+    });
+  },
+  error: function (xhr, textStatus, errorThrown) {
+    //called when there is an error
+    console.error("Error en la solicitud Ajax: " + textStatus + " - " + errorThrown);
+    console.log(xhr.responseText);//muestra en la consola del navegador todos los errores
+    //console.error(xhr);
+    //console.error(textStatus);
+    //console.error(errorThrown);
+  }
+  });
+}
+
+function cambiarEstadoEnviado(idcompra,idcompraestado,idcompraestadotipo) {
+  
+  //Ocultar modal
+  let registro = { idcompraestado:idcompraestado, idcompraestadotipo:idcompraestadotipo, idcompra:idcompra}
+  var genericModalEl = document.getElementById('exampleModal')
+  var modal = bootstrap.Modal.getInstance(genericModalEl)
+  $.ajax({
+    type: 'POST',
+    url:'accion/enviar_compra.php',
     data: registro,
     complete: function (xhr, textStatus) {
       //se llama cuando se recibe la respuesta (no importa si es error o éxito)

@@ -1,6 +1,8 @@
 <?php
 class AbmCompraItem{
 
+
+
 private function cargarObjeto($param){$objItem = null;//print_r($param);
     if (array_key_exists('idcompraitem', $param)) {
                 $objProducto = new Producto();

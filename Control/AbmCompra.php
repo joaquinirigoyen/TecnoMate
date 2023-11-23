@@ -215,8 +215,8 @@ class AbmCompra{
         //echo"entro a compra activa";
        // print_r($param) ;
        // if(isset($param["idusuario"])){
-           // $obj = new Usuario;
-          //  $obj->buscar($param["idusuario"]);
+            $obj = new Usuario;
+            $obj->buscar($param["idusuario"]);
           //print_r( $obj);
 
             $objCo = new Compra;
