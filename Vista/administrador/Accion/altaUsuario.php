@@ -25,6 +25,7 @@ if($exito){
     $paramUsuarioRol['idusuario'] = $idUsuario;
     $paramUsuarioRol['idrol'] =$rol;
     $objUsuarioRol->alta($paramUsuarioRol);
+    
     echo"Usuario cargado correctamente";
 } 
 else{

@@ -9,7 +9,6 @@ include_once '../estructura/navSeguro.php';
     <h5  id="respuesta"></h5>
 </div>
 <div class="container p-3 " >
- <form  id="formAltaUs">
   <div class="card text-center w-50 mb-3 "> 
     <div class="card-header text-bg-dark mb-3">
           <h5> USUARIO NUEVO</h5>
@@ -17,16 +16,16 @@ include_once '../estructura/navSeguro.php';
     <div class="card-body">
     <form id="formAltaUs">
             <label for="nombreUsuario" class="col-form-label">Usuario</label>
-            <input type="text" class="form-control form-control-sm" id="nomUsuario" >
+            <input type="text" class="form-control form-control-sm" id="nomUsuario" required >
             <br>
             <label for="passUsuario" class="col-form-label">Contraseña</label>
-            <input type="password" class="form-control form-control-sm" id="passUsuario" >
+            <input type="password" class="form-control form-control-sm" id="passUsuario" required >
             <label for="email" class="col-form-label">Email</label>
             <input  class="form-control form-control-sm" id="email" >
          
             <div class="contenedor-dato">
             <label for="passUsuario" class="col-form-label">Asignar Rol con numero "(1)Administrador,(2)Deposito, (3)Cliente"</label>
-            <input type="text" class="form-control form-control-sm" id="rol">
+            <input type="text" class="form-control form-control-sm" id="rol" required>
             </div>
             <div class="card-footer text-body-secondary">
                 <button type="submit" class="btn btn-dark" id="enviar">Crear usuario</button>

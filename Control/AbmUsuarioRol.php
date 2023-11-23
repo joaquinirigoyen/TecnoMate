@@ -3,45 +3,6 @@ class AbmUsuarioRol {
     
     // Metodos
 
-    /**
-     * Funcion ABM. Espera un array de parametro. Indicando la accion a realizar.
-     * Retorna un array con un mensaje y un booleano segun su exito.
-     * @param array $datos
-     * @return boolean
-     */
-    public function abm($datos){
-        $array = [];
-        $array ["exito"] = false;  
-        $array ["mensaje"] = "";      
-        if (isset($datos['accion'])) 
-        {
-            if($datos['accion']=='editar')
-            {
-                if ($this->modificacion($datos)) {
-                    $array ["exito"] = true;
-                }
-            }
-            if($datos['accion']=='borrar') 
-            {
-                if ($this->baja($datos)) 
-                {
-                    $array ["exito"] = true;
-                }
-            }
-            if($datos['accion']=='nuevo')
-            {
-                if ($this->alta($datos)) {
-                    $array ["exito"] = true;
-                }
-            }
-            if ($array ["exito"]) {
-                $array ["mensaje"] = "<h3 class='text-success'>La accion " . $datos['accion'] . " se realizo correctamente.</h3>";
-            } else {
-                $array ["mensaje"] = "<h3 class='text-danger'>La accion " . $datos['accion'] . " no pudo concretarse.</h3>";
-            } 
-        }
-        return $array;
-    }
     
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto.
@@ -95,9 +56,11 @@ class AbmUsuarioRol {
      * @return boolean
      */
      private function seteadosCamposClaves($param){
+        $echo="entro al seteado";
         $resp = false;
-        if (isset($param['idrol']) && (isset($param['idusuario']))) // VER!!!
+        if (isset($param['idrol']) && isset($param['idrol'])){
             $resp = true;
+        }
         return $resp;
     }
     
@@ -123,8 +86,10 @@ class AbmUsuarioRol {
      * @return boolean
      */
     public function baja($param){
+        echo"entro al baja";
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
+            echo"entro al if";
             $elObjUsuarioRol = $this->cargarObjetoConClave($param);
             if ($elObjUsuarioRol!=null and $elObjUsuarioRol->eliminar()){
                 $resp = true;

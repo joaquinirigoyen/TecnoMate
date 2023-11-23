@@ -57,6 +57,7 @@ echo"<h2 class='text-center'>Mi carrito</h2>";
    echo "<div class='alert alert-danger' role='alert'>
     Carrito vacio.
   </div>";
+  echo '<a href="homeCliente.php"> <button type="button" class="btn btn-outline-secondary btn-lg me-md-2">Volver</button></a>';
   }
   echo"</div>";
 

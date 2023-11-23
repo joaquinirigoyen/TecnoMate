@@ -77,7 +77,7 @@ $n = count($usuarioRol);
         <br>
 
         <div class="d-grid mb-3 gap-2">
-            <input type="submit" value="Editar" class="btn text-white  btn-dark"></input>
+            <input type="submit" value="Enviar" class="btn text-white  btn-dark"></input>
         </div>
     </form>
     <a href="./listarUsuarios.php"><input type="submit" value="Cancelar" class="btn text- white btn-danger">

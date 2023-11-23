@@ -52,7 +52,7 @@ class AbmRol{
      */
     public function alta($param){
         $resp = false;
-        //$param['NroDni'] =null;
+      
         $unObjRol = $this->cargarObjeto($param);
         if ($unObjRol!=null && $unObjRol->insertar()){
             $resp = true;

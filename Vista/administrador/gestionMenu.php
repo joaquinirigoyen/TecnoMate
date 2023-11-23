@@ -10,15 +10,18 @@ $objRol = new AbmRol();//para obtener el nombre del rol? Necesario?
 $listMenu = $objMenu->buscar(null);
 
 ?>
-<script src="../estructura/js/menus.js"></script>
+<script src="../js/menus.js"></script>
 <div class="contenido-pagina">
   <div class="container p-3">
+    <div class="container text-center">
     <button><i class="bi bi-database-fill-add"></i></button>
     <a class="btn  btn-secondary  text-decoration-none" href="formCrearNuevoRol.php">Crear un Nuevo Rol</a>
-    <a class="btn btn-secondary text-decoration-none" href="formAccesoRol.php">Ver Roles</a> 
+    <a class="btn btn-secondary text-decoration-none" href="listarRoles.php">Ver Roles</a> 
     <a class="btn  btn-secondary text-decoration-none" href="fromCrearNuevoItemMenu.php">Crear un Nuevo Item Menu</a>
+   </div>
  </div>
     <?php 
+      echo "<h4 class='text-center text-white bg-black p-3' >Listado de MENUS</h4>";
     if (count($listMenu)>0){
         echo '<table class="table table-striped  table-hover">
         <thead >
@@ -72,7 +75,7 @@ $listMenu = $objMenu->buscar(null);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>No se borrara permanentemente de la base de datos sino que se le realizara un borrado logico</p>
+        <p>No se borrara permanentemente de la base de datos, se seteara una fecha de baja.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

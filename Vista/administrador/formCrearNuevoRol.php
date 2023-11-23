@@ -6,8 +6,8 @@ include_once '../estructura/navSeguro.php';
 
 ?>
 <div class="contenido-pagina ">
-<div class="alert alert-success" id="respuesta" role="alert">
-
+<div>
+   <h4  id="respuesta" ></h4>
 </div>
 <div class="container p-3" >
       
@@ -19,10 +19,10 @@ include_once '../estructura/navSeguro.php';
  
          <div class="card-body">
                  <label for="nombreUsuario" class="col-form-label">Ingrese Id del Rol (un numero)</label>
-                 <input type="text" class="form-control form-control-sm" id="idrol" name="idrol">
+                 <input type="text" class="form-control form-control-sm" id="idrol" name="idrol" required>
                     <br>
                  <label for="emailUsuario" class="col-form-label">Descripcion del Rol</label>
-                 <input type="text" class="form-control form-control-sm" id="rodescripcion" name="rodescripcion">
+                 <input type="text" class="form-control form-control-sm" id="rodescripcion" name="rodescripcion" required>
                   <br>
                   <div class="card-footer text-body-secondary">
                     <input type="submit" class="btn btn-dark" value="Crear Rol"></input>

@@ -29,7 +29,7 @@ include_once("../estructura/navSeguro.php");
                 <img class="imagen-accion" src="../../Archivos/Imagenes/accionAdmin3.png" alt="Crear nuevo rol">
                 <div class="informacion-accion">
                     <p>CREAR NUEVOS ROLES E ÍTEMS DE MENÚ</p>
-                    <button><a class="btn  text-decoration-none" href="../administrador/gestionMenu.php">Crear Roles</a> </button>
+                    <button><a class="btn  text-decoration-none" href="../administrador/gestionMenu.php">Administar</a> </button>
                 </div>
         </div>
     </div>

@@ -36,7 +36,7 @@ class AbmUsuario
         if (isset($param['idusuario'])) {
             $obj = new Usuario();
             $obj->setear($param['idusuario'], null, null, null, null);
-            $obj->cargar();
+           // $obj->cargar();
         }
         return $obj;
     }
@@ -49,8 +49,10 @@ class AbmUsuario
     private function seteadosCamposClaves($param)
     {
         $resp = false;
-        if (isset($param['idusuario']))
+        if (isset($param['idusuario'])){
             $resp = true;
+        }
+        
         return $resp;
     }
 
@@ -95,7 +97,7 @@ class AbmUsuario
      * @return boolean
      */
     public function modificar($param){
-
+    
         $respuesta = false;
         if ($this->seteadosCamposClaves($param)) {
 

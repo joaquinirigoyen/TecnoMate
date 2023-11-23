@@ -24,18 +24,21 @@
         $objUsuarioRol->alta($paramUsuarioRol);
     } 
     if(array_key_exists('NoCliente', $datos)){
-        $paramUsuarioRol['idrol'] = 3;
-        $objUsuarioRol->baja($paramUsuarioRol);
+        $paramUsuario['idusuario'] = $idUsuario;
+        $paramUsuario['idrol'] = 3;
+        $objUsuarioRol->baja($paramUsuario);
     } 
     if(array_key_exists('NoDeposito', $datos)){
-        $paramUsuarioRol['idrol'] = 2;
-        $objUsuarioRol->baja($paramUsuarioRol);
+        $paramUsuario['idusuario'] = $idUsuario;
+        $paramUsuario['idrol'] = 2;
+        $objUsuarioRol->baja($paramUsuario);
     } 
     if(array_key_exists('NoAdmin', $datos)){
-        $paramUsuarioRol['idrol'] = 1;
-        $objUsuarioRol->baja($paramUsuarioRol);
+        $paramUsuario['idusuario'] = $idUsuario;
+        $paramUsuario['idrol'] = 1;
+        $objUsuarioRol->baja($paramUsuario);
     } 
     echo "<script>alert('Rol Modificado');</script>";
-    //header ('Location: ../homeAdministrador.php');
+   // header ('Location: ../listarUsuarios.php');
     
 ?>

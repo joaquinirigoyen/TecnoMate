@@ -1,12 +1,5 @@
 <?php
 include_once("../../configuracion.php");
-include_once '../../Control/AbmUsuario.php';
-include_once '../../Modelo/Conector/BaseDatos.php';
-include_once '../../Modelo/Usuario.php';
-include_once '../../Control/AbmUsuarioRol.php';
-include_once '../../Control/AbmRol.php';
-include_once '../../Modelo/UsuarioRol.php';
-include_once '../../Modelo/Rol.php';
 
 $tituloPagina = "TechnoMate | Administrador";
 include_once '../estructura/headSeguro.php';
@@ -34,6 +27,7 @@ $colUsuarioRol = $objUsuarioRol->buscar("");
 
 ?>
 <div class="contenido-pagina ">
+
 <div class="container p-3">
 
     <?php
@@ -52,8 +46,8 @@ $colUsuarioRol = $objUsuarioRol->buscar("");
         echo "<tr>
         <td>".$usuario->getIdUsuario()."</td>
         <td>".$usuario->getUsNombre()."</td>
-        <td><button class='btn text-white btn-dark' data-bs-toggle='modal' data-bs-target='#modalModificacion' tabindex='-1'><a style='text-decoration: none;' href='formModificarUsuarios.php?idusuario= ". $usuario->getIdusuario() . "'>Datos</a></button>
-        <button class='btn text-white btn-dark' data-bs-toggle='modal' data-bs-target='#modalModificacion' tabindex='-1'><a style='text-decoration: none;' href='formModificarRoles.php?idusuario= ". $usuario->getIdusuario() . "'>Roles</a></button>
+        <td><a class='btn text-white btn-dark text-decoration-none' href='formModificarUsuarios.php?idusuario= ". $usuario->getIdusuario() . "'>Datos</a>
+        <a class='btn text-white btn-dark text-decoration-none' href='formModificarRoles.php?idusuario= ". $usuario->getIdusuario() . "'>Roles</a>
         </td>
         </tr>";
     }
@@ -64,7 +58,7 @@ $colUsuarioRol = $objUsuarioRol->buscar("");
 
 ?>
 
-    <a href="./homeAdministrador.php"><input type="submit" value="Volver" class="btn text- white btn-dark">
+    <a href="./homeAdministrador.php"><input type="submit" value="Volver" class="btn btn-warning">
         </input></a>
 </div>
 </div>
