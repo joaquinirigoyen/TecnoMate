@@ -3,9 +3,39 @@ include_once("../../configuracion.php");
 $texto = 'Mi Carrito';
 $tituloPagina = "TechnoMate | " . $texto;
 include_once("../estructura/headSeguro.php");
-//include_once("../estructura/navSeguro.php"); este nav me esta gerando errores.....
-$session =new Session();
+include_once '../estructura/navSeguro.php';
+$session = new Session();
+
+/*if ($session->validar()){
+    if($_SESSION['rol'] == 3){
+        include_once '../estructura/navSeguro.php';
+    } else {
+        header('Location: home.php');
+    }
+    
+} else {
+    header('Location: home.php');
+}*/
 $total=0;
+if(isset($_REQUEST['item'])){
+  $producto=$_REQUEST['item'];
+  $accion=$_REQUEST['accion'];
+  $cantidad = $_SESSION['carrito'][$producto]['cant'];
+  $precio = $_SESSION['carrito'][$producto]['precio'];
+  if ($accion == "sumar") {
+    $cantidad++;
+    $_SESSION['carrito'][$producto]['cant'] = $cantidad;
+  } else if ($accion == "restar") {
+    if ($cantidad > 1) {
+      $cantidad--;
+      $_SESSION['carrito'][$producto]['cant'] = $cantidad;
+    }
+  }else if ($accion == "eliminar") {
+      unset($_SESSION['carrito'][$producto]);
+    }
+    $total += $cantidad * $precio;
+  }
+
 
 echo"<div class='container p-3'>";
 
@@ -31,14 +61,16 @@ echo"<h2 class='text-center'>Mi carrito</h2>";
       echo '</table>';
       echo ' <div class="container text-center">
               <div class="row align-items-center">
-                <div class="col">
-                <a href="carrito.php?item='.$indice.'&accion=sumar"><i class="bi bi-plus-circle-fill" style="font-size: 20px; color: black"></i></a>
-               </div>
+
               <div class="col">
-              <a href="carrito.php?item='.$indice.'&accion=restar"><i class="bi bi-dash-square-fill" style="font-size: 20px; color: black"></i></a>
-             </div>
+              <a href="carrito.php?item='.$indice.'&accion=restar">Restar</a>
+               </div>
+                <div class="col">
+                <a href="carrito.php?item='.$indice.'&accion=sumar">Sumar</a>
+               </div>
+      
             <div class="col">
-            <a href="carrito.php?item='.$indice.'&accion=eliminar"><i class="bi bi-trash3-fill" style="font-size: 20px; color: red"></i></a>
+            <a href="carrito.php?item='.$indice.'&accion=eliminar">Eliminar Item</a>
              </div>
           </div>
         </div>';
@@ -61,28 +93,6 @@ echo"<h2 class='text-center'>Mi carrito</h2>";
   }
   echo"</div>";
 
-
-  if(isset($_REQUEST['item'])){
-    $producto=$_REQUEST['item'];
-    $accion=$_REQUEST['accion'];
-   // $cantidad = $_SESSION['carrito'][$producto]['cant'];
-    $precio = $_SESSION['carrito'][$producto]['precio'];
-    if ($accion == "sumar") {
-      $cantidad = $_SESSION['carrito'][$producto]['cant'];
-      $cantidad++;
-      $_SESSION['carrito'][$producto]['cant'] = $cantidad;
-    } else if ($accion == "restar") {
-      $cantidad = $_SESSION['carrito'][$producto]['cant'];
-      if ($cantidad > 1) {
-        $cantidad--;
-        $_SESSION['carrito'][$producto]['cant'] = $cantidad;
-      }
-    }else if ($accion == "eliminar") {
-        unset($_SESSION['carrito'][$producto]);
-      }
-      $total += $cantidad * $precio;
-     //header("location: carrito.php");
-  }
 
 include_once("../estructura/footer.php");
 ?>
