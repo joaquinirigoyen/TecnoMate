@@ -30,8 +30,8 @@ $compra = $arayCompra[0];//objCompra
         $param['idcompraestado'] = 0;
         $param['idcompra'] = $compra->getIdCompra();
         $param['idcompraestadotipo'] = 4;
-        $param['cefechaini'] =  $fecha_actual;
-        $param['cefechafin'] = null;
+        $param['cefechaini'] = $estado->getCeFechaIni();;
+        $param['cefechafin'] = $fecha_actual;
         $exito = $cancelado->alta($param);
        
         echo "cancelacion realizada";
