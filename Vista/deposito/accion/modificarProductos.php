@@ -1,12 +1,19 @@
 <?php
-    include_once '../../configuracion.php';
+    include_once '../../../configuracion.php';
     $datos = data_submitted();
 
     $objProducto = new AbmProducto();
-        
-    if($objProducto->modificar($datos)){
-        echo "pudo";
-    } else {
-        echo "no pudo";
+ 
+    $respuesta =$objProducto->modificar($datos);
+
+    if($respuesta == true){
+        echo "mofique producto";
+        header('Location: ../listarProductos.php');
+
+    } else{
+        echo "Error modificar";
     }
+
+
+
 ?>

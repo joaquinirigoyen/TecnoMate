@@ -43,8 +43,9 @@ class AbmProducto
      private function seteadosCamposClaves($param)
     {
         $resp = false;
-        if (isset($param['idproducto']))
+        if (isset($param['idproducto'])){
             $resp = true;
+        }
         return $resp;
     }
   
@@ -87,6 +88,7 @@ class AbmProducto
      * @return boolean
      */
     public function modificar($param){
+       // print_r($param);
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $unObjProd=$this->cargarObjeto($param);

@@ -2,8 +2,20 @@
 include_once("../../configuracion.php");
 $tituloPagina = "TechnoMate | Inicio";
 include_once("../estructura/headSeguro.php");
-include_once("../estructura/navSeguro.php");
+$objSesion = new Session();
+
+if ($objSesion->validar()){
+    if($_SESSION['rol'] == 3){
+        include_once '../estructura/navSeguro.php';
+    } else {
+        header('Location: home.php');
+    }
+    
+} else {
+    header('Location: home.php');
+}
 ?>
+
 
 <div class="contenido-pagina">
     <div class="carrusel">

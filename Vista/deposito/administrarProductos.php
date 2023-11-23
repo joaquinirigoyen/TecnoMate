@@ -1,5 +1,6 @@
 <?php
 include_once ('../../configuracion.php');
+include_once '../estructura/headSeguro.php';
 
 $cod=$_REQUEST['codigo'];
 
@@ -13,7 +14,7 @@ $producto=$objProducto->buscar($param);
 <!-- Crea un modal con un formulario para actualizar productos -->
 
 
-        <form name="formCrearProducto" id="formCrearProducto" method="POST" class="needs-validation" novalidate>
+        <form name="formACtualizarProd" id="formACtualizarProd" method="POST" action="accion/modificarProductos.php" class="needs-validation" novalidate>
           
           <div class="contenedor-dato">
           <label class="form-label">ID de producto</label>
@@ -41,6 +42,10 @@ $producto=$objProducto->buscar($param);
            <input  class="form-control" type="text" name="tipo" id="tipo" value="<?php echo $producto[0]->getTipo() ?>" ></input>
           </div>
           <br>
+          <div class="contenedor-dato">
+          <label class="form-label">imagen</label>
+           <input  class="form-control" type="text" name="tipo" id="tipo" value="<?php echo $producto[0]->getImagenProducto() ?>" ></input>
+          </div>
           <div class="d-grid mb-3 gap-2">
           <button  type="submit" class="btn text-white  btn-dark">Actualizar datos</button>
           </div>

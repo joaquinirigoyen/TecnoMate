@@ -50,4 +50,3 @@ if ($objSesion->validar()){
  include_once("agregarProductos.php");
 include_once ("../estructura/footer.php");
 ?>
-<script src="../js/altaProducto.js"></script>

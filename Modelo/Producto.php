@@ -166,6 +166,7 @@ class Producto
         $sql = "UPDATE producto SET pronombre = '" . $this->getProNombre() . "',prodetalle = '" . $this->getProDetalle() . "',procantstock = '" . $this->getProCantStock() .
             "',tipo= '" . $this->getTipo() . "', imagenproducto='" . $this->getImagenProducto() . "' WHERE idproducto = '" . $this->getIdProducto() . "' ";
         if ($base->Iniciar()) {
+         
             if ($base->Ejecutar($sql)) {
                 $resp = true;
             } else {

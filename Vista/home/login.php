@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="logologin">
-                    <img src="../../Archivos/Imagenes/logoBlanco.png" alt="Logo de la empresa" width="110" class="logologin">
+                    <img src="../../Archivos/Imagenes/logoNEGRO.png" alt="Logo de la empresa" width="110" class="logologin">
                 </div>
             </div>
                 <h5 class="modal-title ">Iniciar sesión</h5>

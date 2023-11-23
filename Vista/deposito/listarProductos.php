@@ -1,6 +1,5 @@
 <?php
 include_once("../../configuracion.php");
-
 $tituloPagina = "TechnoMate | Deposito";
 include_once '../estructura/headSeguro.php';
 
@@ -73,7 +72,7 @@ include_once ("../estructura/footer.php");
     var resultado = document.getElementById("mostrar");
 
     function enviar(codigo) {
-        // location.href="detalle.php?codigo="+codigo;
+   // location.href="administrarProductos.php?codigo="+codigo;
         var xmlhttp;
         if (window.XMLHttpRequest) {
             xmlhttp = new XMLHttpRequest();
@@ -87,7 +86,7 @@ include_once ("../estructura/footer.php");
             }
         }
 
-        xmlhttp.open("GET", "administrarProductos.php?codigo=" + codigo, true);
+        xmlhttp.open("GET", "administrarProductos.php?codigo="+codigo, true);
         xmlhttp.send();
 
     }

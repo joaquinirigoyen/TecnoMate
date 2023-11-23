@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("#formCrearProducto").validate({
+    $("#formACtualizarProd").validate({
         rules: {
             pronombre: {
                 required: true
@@ -41,7 +41,7 @@ $(document).ready(function () {
             var formData = $(form).serialize()
             
             $.ajax({ 
-                url: "../../Control/Ajax/modificarProducto.php",
+                url: "../deposito/accion/modificarProductos.php",
                 type: "POST",
                 dataType: "json",
                 data: formData,
@@ -57,15 +57,15 @@ $(document).ready(function () {
                         console.log(respuesta.resultado);
 
                         
-                       alert("Actualizacion realizada con exito");
-                        $("#formCrearProducto").form("hide");
+                     //  alert("Actualizacion realizada con exito");
+                     //   $("#formACtualizarProd").form("hide");
 
                     } else {
                         console.log(respuesta.resultado);
                     }
 
                     $(form).find('.is-valid').removeClass('is-valid');
-                    $("#formCrearProducto")[0].reset();
+                    $("#formACtualizarProd")[0].reset();
 
                 },
                 error: function(xhr, textStatus, errorThrown) {

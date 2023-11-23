@@ -65,12 +65,14 @@ echo"<h2 class='text-center'>Mi carrito</h2>";
   if(isset($_REQUEST['item'])){
     $producto=$_REQUEST['item'];
     $accion=$_REQUEST['accion'];
-    $cantidad = $_SESSION['carrito'][$producto]['cant'];
+   // $cantidad = $_SESSION['carrito'][$producto]['cant'];
     $precio = $_SESSION['carrito'][$producto]['precio'];
     if ($accion == "sumar") {
+      $cantidad = $_SESSION['carrito'][$producto]['cant'];
       $cantidad++;
       $_SESSION['carrito'][$producto]['cant'] = $cantidad;
     } else if ($accion == "restar") {
+      $cantidad = $_SESSION['carrito'][$producto]['cant'];
       if ($cantidad > 1) {
         $cantidad--;
         $_SESSION['carrito'][$producto]['cant'] = $cantidad;
@@ -79,7 +81,7 @@ echo"<h2 class='text-center'>Mi carrito</h2>";
         unset($_SESSION['carrito'][$producto]);
       }
       $total += $cantidad * $precio;
-     header("location: carrito.php");
+     //header("location: carrito.php");
   }
 
 include_once("../estructura/footer.php");
