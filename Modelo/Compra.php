@@ -260,7 +260,7 @@ class Compra extends BaseDatos{
         $resp = null;
       
        $consulta = "SELECT * FROM compra INNER JOIN compraestado ON compraestado.idcompra = compra.idcompra
-        WHERE idusuario = ".$this->getObjUsuario()->getIdUsuario()." AND idcompraestadotipo = 1 ;";
+        WHERE idusuario = ".$this->getObjUsuario()->getIdUsuario()." AND idcompraestadotipo = 1 AND cefechafin = '0000-00-00 00:00:00';";
 
         if ( $base ->Iniciar()) {
         //  echo"entro a iniciar";

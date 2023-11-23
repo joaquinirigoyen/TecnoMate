@@ -214,9 +214,9 @@ class AbmCompra{
     public function compraActiva($param){
         //echo"entro a compra activa";
        // print_r($param) ;
-        if(isset($param["idusuario"])){
-            $obj = new Usuario;
-            $obj->buscar($param["idusuario"]);
+       // if(isset($param["idusuario"])){
+           // $obj = new Usuario;
+          //  $obj->buscar($param["idusuario"]);
           //print_r( $obj);
 
             $objCo = new Compra;
@@ -224,10 +224,11 @@ class AbmCompra{
             //print_r($objCo);
             $resultado = $objCo->buscarCompraActiva();
            // echo $resultado;
+           return $resultado;
         }
 
-        return $resultado;
-    }
+       
+    
 
 
     /* ESTA FUNCION busca la ulltima compra cargada*/
