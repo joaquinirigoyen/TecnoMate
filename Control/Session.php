@@ -243,7 +243,7 @@ class Session{
             $abmCompraItem->alta($arrayConsulta);
 
             $stok= $arrayProducto["stock"];
-            $nuevoStock= $stok - $proCantidad;
+            $nuevoStock= ($stok - $proCantidad);
 
             $paramP['idproducto']=$idProducto;
          
