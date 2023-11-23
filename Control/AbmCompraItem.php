@@ -126,6 +126,92 @@ private function cargarObjeto($param){$objItem = null;//print_r($param);
 
         return $arreglo;
     }
+    
+    /**
+     * Funcion ABM. Espera un array de parametro. Indicando la accion a realizar.
+     * Retorna un array con un mensaje y un booleano segun su exito.
+     * @param array $datos
+     * @return boolean
+     */
+    // public function abm($datos){
+    //     $array = [];
+    //     $array ["exito"] = false;  
+    //     $array ["mensaje"] = "";      
+    //     if (isset($datos['accion'])) 
+    //     {
+    //         if($datos['accion']=='editar')
+    //         {
+    //             if ($this->modificacion($datos)) {
+    //                 $array ["exito"] = true;
+    //             }
+    //         }
+    //         if($datos['accion']=='borrar') 
+    //         {
+    //             if ($this->baja($datos)) 
+    //             {
+    //                 $array ["exito"] = true;
+    //             }
+    //         }
+    //         if($datos['accion']=='nuevo')
+    //         {
+    //             if ($this->alta($datos)) {
+    //                 $array ["exito"] = true;
+    //             }
+    //         }
+    //         if($datos['accion']=='borrarItem')
+    //         {
+    //             if ($this->borrarItem($datos)) {
+    //                 $array ["exito"] = true;
+    //             }
+    //         }
+    //         if ($array ["exito"]) {
+    //             $array ["mensaje"] = "<h3 class='text-success'>La accion " . $datos['accion'] . " se realizo correctamente.</h3>";
+    //         } else {
+    //             $array ["mensaje"] = "<h3 class='text-danger'>La accion " . $datos['accion'] . " no pudo concretarse.</h3>";
+    //         } 
+    //     }
+    //     return $array;
+    // }
+    //  */
+    // public function borrarItem($data)
+    // {
+    //     echo"estoy dentro del borrar item";
+    //     print_r($data);
+    //     $data['accion']='borrar';
+    //     $idCompra = $data['idcompra'];
+    //     $idCompraItem = $data['idcompraitem'];
+
+    //     $idCompraItem = $data['idcompraitem'];
+    //     $param['idcompraitem'] = $data['idcompraitem'];
+    //     $param['accion']='borrar';
+    //     $this->abm($param);
+        
+    //     $param1['idcompra']=$idCompra;
+    //     $listaObjCompraItem = $this->buscar($param1);
+
+    //     $objAbmCompraEstado=new AbmCompraEstado();
+    //     $objAbmCompra= new AbmCompra();
+
+    //     if(count($listaObjCompraItem)==0){
+    //         $listarCompraEstado = $objAbmCompraEstado->buscar(null);
+    //         foreach ($listarCompraEstado as $compraEstado) {
+    //             $idCompraActual = $compraEstado->getObjCompra()->getIdCompra();
+    //             if ($idCompra == $idCompraActual) {
+    //                 $arrayBorrar = [];
+    //                 $arrayBorrar['idcompraestado'] = $compraEstado->getIdCompraEstado();
+    //                 $arrayBorrar['accion'] = "borrar";
+    //                 $objAbmCompraEstado->abm($arrayBorrar);
+    //             }
+    //         }
+    //         $arregloCompras = $objAbmCompra->buscar($data);
+    //         $objCompra = $arregloCompras[0];
+    //         $array['idcompra'] = $idCompra;
+    //         $array['accion'] = "borrar";
+    //         $respuesta = $objAbmCompra->abm($array);
+    //     }
+    //     $exito = $respuesta ["exito"];
+    //     return $exito;
+    // }
 }
 
 ?>

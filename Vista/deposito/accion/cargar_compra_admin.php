@@ -9,6 +9,7 @@
           $items = $objCntrlCI->buscar($datos);
           if (count($items) > 0) {
             foreach ($items as $item) {
+        
             ?>
               <div class="product">
                 <div class="row">
@@ -27,12 +28,13 @@
                                 <div>Cantidad: 
                                   <span class="value"><?php echo $item->getCicantidad(); ?></span>
                                 </div>
+                                <div>$
+                                <span> <?php echo $item->getObjProducto()->getProDetalle(); ?></span>
+                                </div>
                               </div>
                             </div>
                           </div>                                        
-                          <div class="col-md-2 price">
-                            <span>$ <?php echo $item->getObjProducto()->getProDetalle(); ?></span>
-                          </div>
+                          <button type="button" class="btn btn-danger quitarItem" onclick="quitarItem(<?php echo $item->getIdCompraItem();?>)">Quitar item</button> 
                         </div>
                       </div>
                     </div>
@@ -57,9 +59,7 @@
                   <button type="button" id="BotonAceptar" class="btn btn-success cerraryRecargar" onclick="cambiarEstado(<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idcompraestadotipo']; ?>)">Aceptar</button>
                   <button type="button" id="BotonEnviar" class="btn btn-success cerraryRecargar" onclick="cambiarEstado(<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idcompraestadotipo']; ?>)">Enviar</button>
                   <button type="button" id="BotonCancelar" class="btn btn-danger cerraryRecargar" onclick="cambiarEstadoCancelado(<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idcompraestadotipo']; ?>)">Cancelar</button>
-                </div>
-                
-               
+                </div>   
             </div>
         </div>
     </div>

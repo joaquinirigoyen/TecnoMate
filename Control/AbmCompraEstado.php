@@ -96,7 +96,7 @@ class AbmCompraEstado{
         $idCompraEstado = $datos['idcompraestado'];
         $idCompra = $datos['idcompra'];
         $idCompraEstadoTipo = $datos['idcompraestadotipo'];
-        //$fechaini = $datos['cefechaini'] ; // no lo usamos
+        $fechaini = $datos['cefechaini'] ; // no lo usamos
         $fechaFin= $datos['cefechafin']; // tecnicamente deberia ser 0000
 
         //seteo el objeto compraEstado (el ultimo estado que tiene/ estado actual)
@@ -117,8 +117,10 @@ class AbmCompraEstado{
                 $id ++;
                 $fecha = '0000-00-00 00:00:00';
             }else if($id == 2) {
+                date_default_timezone_set('America/Argentina/Buenos_Aires');
                 $id ++;
                 $fecha = $fechaFin;
+                $fechaFin = $fechaini;
             }
             $resp = true; 
             $arrayDatos['idcompra'] = $idCompra;

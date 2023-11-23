@@ -214,7 +214,11 @@ class AbmCompra{
     public function compraActiva($param){
         //echo"entro a compra activa";
        // print_r($param) ;
+<<<<<<< HEAD
     // if(isset($param["idusuario"])){
+=======
+       // if(isset($param["idusuario"])){
+>>>>>>> 4af671beb8b6835e9fb41b96806c5dcafacfad17
             $obj = new Usuario;
             $obj->buscar($param["idusuario"]);
           //print_r( $obj);
