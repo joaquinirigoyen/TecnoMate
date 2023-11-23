@@ -9,37 +9,40 @@ function cargarCompra(idcompra,idcompraestado,idusuario ,idcompraestadotipo){
   $("#contenido").load('accion/cargar_compra_admin.php?idcompra='+idcompra+'&idcompraestado='+idcompraestado+"&idusuario="+idusuario+"&idcompraestadotipo="+idcompraestadotipo, function(){
     if(idcompraestadotipo==1){
       $('#BotonAceptar').show();
-      $('#BotonCancelar').hide();
+      $('#BotonCancelar').show();
       $('#BotonEnviar').hide();
-      $('#editarProducto').hide();
+      $('#quitarItem').show();
     }
     if(idcompraestadotipo==2){
       $('#BotonAceptar').hide();
       $('#BotonCancelar').show();
       $('#BotonEnviar').show();
+      $('#quitarItem').show();
     }
     if(idcompraestadotipo==3){
       $('#BotonAceptar').hide();
       $('#BotonCancelar').hide();
       $('#BotonEnviar').hide();
+      $('#quitarItem').hide();
     }
     if(idcompraestadotipo==4){
       $('#BotonAceptar').hide();
       $('#BotonCancelar').hide();
       $('#BotonEnviar').hide();
+      $('#quitarItem').hide();
     }
   });
 }
 
-function editarProducto(idcompra,idcompraestado,idcompraestadotipo) {
+function quitarItem(idItem) {
   
   //Ocultar modal
-  let registro = { idcompraestado:idcompraestado, idcompraestadotipo:idcompraestadotipo, idcompra:idcompra}
+  let registro = {idItem:idItem}
   var genericModalEl = document.getElementById('exampleModal')
   var modal = bootstrap.Modal.getInstance(genericModalEl)
   $.ajax({
     type: 'POST',
-    url:'accion/editar_producto.php',
+    url:'accion/quitar_item.php',
     data: registro,
     complete: function (xhr, textStatus) {
       //se llama cuando se recibe la respuesta (no importa si es error o éxito)
@@ -47,7 +50,6 @@ function editarProducto(idcompra,idcompraestado,idcompraestadotipo) {
     },
     success: function(msg) {
       console.log(msg);
-
       // Espera a que el documento esté listo
       $(document).ready(function() {
       // Maneja el clic en el botón dentro del modal
@@ -63,9 +65,6 @@ function editarProducto(idcompra,idcompraestado,idcompraestadotipo) {
     //called when there is an error
     console.error("Error en la solicitud Ajax: " + textStatus + " - " + errorThrown);
     console.log(xhr.responseText);//muestra en la consola del navegador todos los errores
-    //console.error(xhr);
-    //console.error(textStatus);
-    //console.error(errorThrown);
   }
   });
 }
