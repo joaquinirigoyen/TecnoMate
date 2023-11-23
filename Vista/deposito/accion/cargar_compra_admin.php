@@ -28,7 +28,7 @@
                                 <div>Cantidad: 
                                   <span class="value"><?php echo $item->getCicantidad(); ?></span>
                                 </div>
-                                <div>$
+                                <div>
                                 <span> <?php echo $item->getObjProducto()->getProDetalle(); ?></span>
                                 </div>
                               </div>
