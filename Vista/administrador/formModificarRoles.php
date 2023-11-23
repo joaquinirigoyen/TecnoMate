@@ -58,24 +58,15 @@ $n = count($usuarioRol);
         <div class="contenedor-dato">
             <label for="usnombre" class="form-label">Administrador</label>
             <input type="checkbox" name="Admin" value="Admin">
+            <br>
             <label for="usnombre" class="form-label">Depósito</label>
             <input type="checkbox" name="Deposito" value="Deposito">
+            <br>
             <label for="usnombre" class="form-label">Cliente</label>
             <input type="checkbox" name="Cliente" value="Cliente">
+            <br>
         </div>
-        <br>
-
-        <h4>Quitar roles</h4>
-        <div class="contenedor-dato">
-            <label for="usnombre" class="form-label">Administrador</label>
-            <input type="checkbox" name="NoAdmin" value="Admin">
-            <label for="usnombre" class="form-label">Depósito</label>
-            <input type="checkbox" name="NoDeposito" value="Deposito">
-            <label for="usnombre" class="form-label">Cliente</label>
-            <input type="checkbox" name="NoCliente" value="Cliente">
-        </div>
-        <br>
-
+    
         <div class="d-grid mb-3 gap-2">
             <input type="submit" value="Enviar" class="btn text-white  btn-dark"></input>
         </div>

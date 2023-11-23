@@ -197,6 +197,7 @@ class Session{
         $abmCompra = new AbmCompra();
         $abmCompraEstado = new AbmCompraEstado();
         $abmCompraItem = new AbmCompraItem();
+        $abmCompraProduct = new AbmProducto();
 
         
               $param['idusuario']=$idUsuario;
@@ -231,7 +232,7 @@ class Session{
         // Creo el CompraItem
 
         for ($i = 0; $i < count($colDatos); $i++) {
-            print_r($colDatos);
+            //print_r($colDatos);
             $arrayConsulta = [];
             $arrayProducto = $colDatos[$i];
             $idProducto = $arrayProducto["id"];
@@ -240,6 +241,20 @@ class Session{
             $arrayConsulta["idproducto"] = $idProducto;
             $arrayConsulta["cicantidad"] = $proCantidad;
             $abmCompraItem->alta($arrayConsulta);
+
+            $stok= $arrayProducto["stock"];
+            $nuevoStock= $stok - $proCantidad;
+
+            $paramP['idproducto']=$idProducto;
+         
+            $buscarProd= $abmCompraProduct->buscar($paramP);
+            $paramPr['idproducto']=$buscarProd[0]->getIdProducto();
+            $paramPr['pronombre']=$buscarProd[0]->getProNombre();
+            $paramPr['prodetalle']=$buscarProd[0]->getProDetalle();
+            $paramPr['procantstock']= $nuevoStock;
+            $paramPr['tipo']=$buscarProd[0]->getTipo();
+            $paramPr['imagenproducto']=$buscarProd[0]->getImagenProducto();
+            $setearpro= $abmCompraProduct->modificar($paramPr);
             
         }
  

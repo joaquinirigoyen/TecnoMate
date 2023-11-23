@@ -21,6 +21,7 @@ if ($objSesion->validar()){
 $objRol = new AbmRol();
 $colRol = $objRol->buscar("");
 
+
 ?>
 <div class="contenido-pagina ">
 
@@ -36,11 +37,14 @@ $colRol = $objRol->buscar("");
     <th>Accion</th>";
 
     foreach($colRol as $rol){
+
+        $idrol= $rol->getIdRol();
+       
         echo "<tr>
-        <td>".$rol->getIdRol()."</td>
+        <td>".$idrol."</td>
         <td>".$rol-> getRolDescripcion()."</td>
-        <td><button class='btn text-white btn-dark'  href='formModificarRol.php?idusuario= ".$rol->getIdRol()."'>modificar</a></button>
-        </td>
+        <td> <a class='btn text-white btn-dark text-decoration-none' href='editarRol.php?idRol=".$idrol."'>Editar</a>
+
         </tr>";
     }
     echo "</table>";
@@ -50,7 +54,7 @@ $colRol = $objRol->buscar("");
 
 ?>
 
-    <a href="./gestionMenu.php"><input type="submit" value="Volver" class="btn btn-warning">
+    <a href="gestionMenu.php"><input type="submit" value="Volver" class="btn btn-warning">
         </input></a>
 </div>
 </div>

@@ -98,6 +98,7 @@ class Rol{
      * @return boolean
      */
     public function modificar(){
+     
         $resp = false;
         $base=new BaseDatos();
         

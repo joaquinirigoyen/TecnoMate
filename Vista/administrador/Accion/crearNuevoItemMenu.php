@@ -12,6 +12,7 @@ $objMenu = new AbmMenu();
 $exito = $objMenu->alta($datos);
 if($exito){
     echo "Item Menu Creado";
+    header ('Location: ../gestionMenu.php');
 }else{
     echo "Item Menu NO Creado";
 }

@@ -45,7 +45,6 @@ $usuario = $objUsuario->buscar($param1);
     <thead class=''>
       <thead class='table-dark'>
         <th colspan='4'scope='col'>idCompra:{$compra->getIdCompra()}</td>
-        <th  scope='col'><button type='button' class='btn  btn-warning' data-bs-toggle='modal' data-bs-target='#historial{$compra->getIdCompra()}'>Editar</button></td>
       </thead>
     </thead>
     

@@ -40,8 +40,10 @@ class AbmRol{
     
     private function seteadosCamposClaves($param){
         $resp = false;
-        if (isset($param['idrol']))
+        if (isset($param['idrol'])){
             $resp = true;
+        }
+         
         return $resp;
     }
 
@@ -84,6 +86,7 @@ class AbmRol{
      * @return boolean
      */
     public function modificar($param){
+
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $unObjRol = $this->cargarObjeto($param);

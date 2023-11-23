@@ -18,8 +18,8 @@ include_once '../estructura/navSeguro.php';
           </div>
  
          <div class="card-body">
-                 <label for="nombreUsuario" class="col-form-label">Ingrese Id del Rol (un numero)</label>
-                 <input type="text" class="form-control form-control-sm" id="idrol" name="idrol" required>
+              
+                 <input type="text" class="form-control form-control-sm" id="idrol" name="idrol" value="0" readonly>
                     <br>
                  <label for="emailUsuario" class="col-form-label">Descripcion del Rol</label>
                  <input type="text" class="form-control form-control-sm" id="rodescripcion" name="rodescripcion" required>

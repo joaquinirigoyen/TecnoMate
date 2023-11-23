@@ -23,22 +23,8 @@
         $paramUsuarioRol['idrol'] = 1;
         $objUsuarioRol->alta($paramUsuarioRol);
     } 
-    if(array_key_exists('NoCliente', $datos)){
-        $paramUsuario['idusuario'] = $idUsuario;
-        $paramUsuario['idrol'] = 3;
-        $objUsuarioRol->baja($paramUsuario);
-    } 
-    if(array_key_exists('NoDeposito', $datos)){
-        $paramUsuario['idusuario'] = $idUsuario;
-        $paramUsuario['idrol'] = 2;
-        $objUsuarioRol->baja($paramUsuario);
-    } 
-    if(array_key_exists('NoAdmin', $datos)){
-        $paramUsuario['idusuario'] = $idUsuario;
-        $paramUsuario['idrol'] = 1;
-        $objUsuarioRol->baja($paramUsuario);
-    } 
+
     echo "<script>alert('Rol Modificado');</script>";
-   // header ('Location: ../listarUsuarios.php');
+    header ('Location: ../listarUsuarios.php');
     
 ?>
