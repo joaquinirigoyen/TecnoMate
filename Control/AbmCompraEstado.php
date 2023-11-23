@@ -59,6 +59,8 @@ class AbmCompraEstado{
         $idCompraEstadoTipo = $data['idcompraestadotipo'];
         //cargo el ultimo compra estado, como viene uno solo(busca por su id) selecciono el arreglo en posicion 0
         $buscaCompra['idcompraestado']=$data['idcompraestado'];
+        $estadoCompra = $data['cetdescripcion'];
+
         $compraEstado = new AbmCompraEstado();
         $arrObjCompraEstado = $compraEstado->buscar($buscaCompra);
         $ObjCompraEstado = $arrObjCompraEstado[0];
@@ -72,6 +74,7 @@ class AbmCompraEstado{
         // seteo el arreglo de datos para las acciones AmbCompraEstado
         $datos['accion'] = "editarEstado";
         $datos['idcompraestado'] = $idCompraEstado; //id del ultimo estado que tuvo la compra
+        $datos['cetdescripcion'] = $estadoCompra;
         $datos['idcompra'] = $idCompra; // id de la compra
         $datos['idcompraestadotipo'] = $idCompraEstadoTipo; //id del tipo de estado de la compra
         $datos['cefechaini'] = $ceFechaIni; // fecha Inicio estado
@@ -112,7 +115,7 @@ class AbmCompraEstado{
             $id = $idCompraEstadoTipo;
             $resp = true; 
             $arrayDatos['idcompra'] = $idCompra;
-            $arrayDatos['idcompraestadotipo'] = $id + 1;
+            $arrayDatos['idcompraestadotipo'] = $id +1;
             $arrayDatos['cefechaini'] =  $fechaFin;
             $arrayDatos['cefechafin'] = '0000-00-00 00:00:00';
             echo "antes de entrar al alta";
@@ -187,8 +190,7 @@ class AbmCompraEstado{
      * @param array $param
      */
     public function alta($param){
-        echo "estoy en alta";
-        print_r($param);
+        //int_r($param);
         $param['idcompraestado'] = null; 
         $resp = false;
         $unObjCompraEstado = $this->cargarObjeto($param);

@@ -55,8 +55,8 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" id="BotonAceptar" class="btn btn-success cerraryRecargar" onclick="cambiarEstado(<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idcompraestadotipo']; ?>)">Aceptar</button>
-                  <button type="button" id="BotonCancelar" class="btn btn-success cerraryRecargar" onclick="cambiarEstado(<?php echo $datos['idcompraestadotipo']; ?>,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>)">Cancelar</button>
-                  <button type="button" id="BotonEnviar" class="btn btn-success cerraryRecargar" onclick="cambiarEstado(<?php echo $datos['idcompraestadotipo']; ?>,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>)">Enviar</button>
+                  <button type="button" id="BotonEnviar" class="btn btn-success cerraryRecargar" onclick="cambiarEstado(<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idcompraestadotipo']; ?>)">Enviar</button>
+                  <button type="button" id="BotonCancelar" class="btn btn-danger cerraryRecargar" onclick="cambiarEstadoCancelado(<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idcompraestadotipo']; ?>)">Cancelar</button>
                 </div>
                 
                
