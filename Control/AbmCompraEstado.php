@@ -113,11 +113,18 @@ class AbmCompraEstado{
         print_r($array);
         if($this->modificacion($array)){
             $id = $idCompraEstadoTipo;
+            if ($id == 1){
+                $id ++;
+                $fecha = '0000-00-00 00:00:00';
+            }else if($id == 2) {
+                $id ++;
+                $fecha = $fechaFin;
+            }
             $resp = true; 
             $arrayDatos['idcompra'] = $idCompra;
-            $arrayDatos['idcompraestadotipo'] = $id +1;
+            $arrayDatos['idcompraestadotipo'] = $id;
             $arrayDatos['cefechaini'] =  $fechaFin;
-            $arrayDatos['cefechafin'] = '0000-00-00 00:00:00';
+            $arrayDatos['cefechafin'] = $fecha;
             echo "antes de entrar al alta";
             print_r($arrayDatos);
             $this->alta($arrayDatos);
