@@ -1,6 +1,6 @@
 <?php
     include_once '../../configuracion.php';
-    session_start();
+
     $datos = data_submitted();
 
     $objUsuario = new AbmUsuario();

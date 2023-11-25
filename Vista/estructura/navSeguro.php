@@ -1,3 +1,4 @@
+
 <!-- ____________________________________ NAV BAR 1 ________________________________ -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
@@ -13,6 +14,7 @@
             <div class="collapse navbar-collapse menuUsuario" id="navbar-Toggler">
                 <ul class="navbar-nav d-flex justify-content-center align-items-center">
                 <?php
+
                  for ($i = 0; $i < count($listaMenu); $i++) {
                     if ($listaMenu[$i]->getMeDeshabilitado() == null) {
 

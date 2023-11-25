@@ -10,6 +10,7 @@ $objProducto= new AbmProducto();
 
 $producto=$objProducto->buscar($param);
 
+$imagen= $producto[0]->getImagenProducto();
 ?>
 <!-- Crea un modal con un formulario para actualizar productos -->
 
@@ -41,11 +42,8 @@ $producto=$objProducto->buscar($param);
           <label class="form-label">Tipo</label>
            <input  class="form-control" type="text" name="tipo" id="tipo" value="<?php echo $producto[0]->getTipo() ?>" ></input>
           </div>
+          <input type="hidden" name="image_url" value="<?php echo $imagen  ?>">
           <br>
-          <div class="contenedor-dato">
-          <label class="form-label">imagen</label>
-           <input  class="form-control" type="text" name="tipo" id="tipo" value="<?php echo $producto[0]->getImagenProducto() ?>" ></input>
-          </div>
           <div class="d-grid mb-3 gap-2">
           <button  type="submit" class="btn text-white  btn-dark">Actualizar datos</button>
           </div>

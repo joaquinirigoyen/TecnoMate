@@ -28,13 +28,12 @@
                                 <div>Cantidad: 
                                   <span class="value"><?php echo $item->getCicantidad(); ?></span>
                                 </div>
-                                <div>$
+                                <div>
                                 <span> <?php echo $item->getObjProducto()->getProDetalle(); ?></span>
                                 </div>
                               </div>
                             </div>
                           </div>                                        
-                          <!-- <button type="button" class="btn btn-danger quitarItem" onclick="quitarItem(<?php echo $item->getIdCompraItem();?>)">Quitar item</button>  -->
                         </div>
                       </div>
                     </div>

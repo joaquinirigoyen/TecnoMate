@@ -21,11 +21,9 @@ class AbmCompra{
             }
         }
         if($datos['accion']=='nuevo'){
-        //    echo "estoy en alta accion nueva";
+      
             if($this->alta($datos)){
-              //  echo "hice el alta";
-               // $compra = new Compra();
-               // $idCompra = $compra->getIdCompra();
+             
             }
             
         }
@@ -207,28 +205,19 @@ class AbmCompra{
                 $colInfo[$i] = $arregloObj[$i]->obtenerInfo();
             }
         }
-
         return $colInfo;
     }
 
+    /* busca si hay una compra activa en estado iniciada*/
     public function compraActiva($param){
-        //echo"entro a compra activa";
-       // print_r($param) ;
        // if(isset($param["idusuario"])){
             $obj = new Usuario;
             $obj->buscar($param["idusuario"]);
-          //print_r( $obj);
-
             $objCo = new Compra;
             $objCo->setObjUsuario($obj);
-            //print_r($objCo);
             $resultado = $objCo->buscarCompraActiva();
-           // echo $resultado;
            return $resultado;
         }
-
-       
-    
 
 
     /* ESTA FUNCION busca la ulltima compra cargada*/
@@ -239,7 +228,71 @@ class AbmCompra{
             return $resultado;
         }
 
-      
+   /**
+     * finaliza la compra del cliente.
+     */
+    public function finalizarCompra($colDatos,$idUsuario){
+        $abmCompra = new AbmCompra();
+        $abmCompraEstado = new AbmCompraEstado();
+        $abmCompraItem = new AbmCompraItem();
+        $abmCompraProduct = new AbmProducto();
+        $objSesion = new Session();
+
+              $param['idusuario']=$idUsuario;
+              $idCompra=$abmCompra->compraActiva($param);
+              if ( $idCompra == null){
+                $fechaC=date("Y-m-d H:i:s");
+                $arrayConsulta = [];
+                $arrayConsulta["idusuario"] = $idUsuario;
+                $arrayConsulta["cofecha"] =   $fechaC;
+                $arrayConsulta["accion"] = "nuevo";
+                $resultado = $abmCompra->abm($arrayConsulta);
+                $ultimaCompra =$abmCompra->ultimaCompra();
+                $idCompra= $ultimaCompra;
+
+              /* Crear un CompraEstado, con el tipo de estado siendo Iniciada*/
+                $arrayConsultaE = [];
+                 $arrayConsultaE["idcompra"] = $idCompra;
+                $arrayConsultaE["idcompraestadotipo"] = 1; // guardo 1 ya que es el id de la compra iniciada
+                  $arrayConsultaE["cefechaini"] = $fechaC;
+                  $arrayConsultaE["cefechafin"] = NULL;
+                  $resultado = $abmCompraEstado->alta($arrayConsultaE);
+              } else if($idCompra != null){
+                $idCompra=$idCompra;
+              }
+            
+        // Creo el CompraItem
+        for ($i = 0; $i < count($colDatos); $i++) {
+            //print_r($colDatos);
+            $arrayConsulta = [];
+            $arrayProducto = $colDatos[$i];
+            $idProducto = $arrayProducto["id"];
+            $proCantidad = $arrayProducto["cant"];
+            $arrayConsulta["idcompra"] = $idCompra;
+            $arrayConsulta["idproducto"] = $idProducto;
+            $arrayConsulta["cicantidad"] = $proCantidad;
+            $abmCompraItem->alta($arrayConsulta);
+            
+            //doy de baja el stokc delos item..
+            $stok= $arrayProducto["stock"];
+            $nuevoStock= ($stok - $proCantidad);
+
+            $paramP['idproducto']=$idProducto;
+         
+            $buscarProd= $abmCompraProduct->buscar($paramP);
+            $paramPr['idproducto']=$buscarProd[0]->getIdProducto();
+            $paramPr['pronombre']=$buscarProd[0]->getProNombre();
+            $paramPr['prodetalle']=$buscarProd[0]->getProDetalle();
+            $paramPr['procantstock']= $nuevoStock;
+            $paramPr['tipo']=$buscarProd[0]->getTipo();
+            $paramPr['imagenproducto']=$buscarProd[0]->getImagenProducto();
+            $setearpro= $abmCompraProduct->modificar($paramPr);
+            
+        }
+
+        $objSesion->eliminarCarrito();
+    }
+
     }
 
 ?>

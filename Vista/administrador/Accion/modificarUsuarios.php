@@ -1,12 +1,12 @@
 <?php
 include_once '../../../configuracion.php';
-
-$idUsuario=$_POST['id'];
+$datos = data_submitted();
+$idUsuario=$datos['id'];
 $param['idusuario']=$idUsuario;
 $objUsuario = new AbmUsuario(); 
 $usuario = $objUsuario->buscar($param);
 
-$desabilitar=$_POST['borrar'];
+$desabilitar=$datos['borrar'];
 $borrar2=strtolower($desabilitar);
 
 if($borrar2 == 'si'){
@@ -15,9 +15,9 @@ if($borrar2 == 'si'){
     $fecha= null;
 }
 $datos['idusuario']=$idUsuario;
-$datos['usnombre']=$_POST['nombreUs'];
-$datos['uspass']=md5($_POST['pass']);
-$datos['usmail']=$_POST['email'];
+$datos['usnombre']=$datos['nombreUs'];
+$datos['uspass']=md5($datos['pass']);
+$datos['usmail']=$datos['email'];
 $datos['usdeshabilitado']= $fecha;
 
 

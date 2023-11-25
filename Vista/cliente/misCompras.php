@@ -18,10 +18,6 @@ $param1["idusuario"]= $idusuario;
 //busca el usuario por id
 $usuario = $objUsuario->buscar($param1);
 
-// busca las compras del usuario
-//$comprasUsuario = $objCompra->buscar($usuario);
-
-
 ?>
 
 <div class="contenido-pagina">
