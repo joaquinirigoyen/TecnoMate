@@ -2,19 +2,8 @@
 include_once("../../configuracion.php");
 $tituloPagina = "TechnoMate | Deposito";
 include_once '../estructura/headSeguro.php';
-
+include_once '../estructura/navSeguro.php';
 $objSesion = new Session();
-
-if ($objSesion->validar()){
-    if($_SESSION['rol'] == 2){
-        include_once '../estructura/navSeguro.php';
-    } else {
-        header('Location: homeDeposito.php');
-    }
-} else {
-    header('Location: home.php');
-}
-
 
     $objProducto = new AbmProducto();
     $colProductos = $objProducto->buscar("");

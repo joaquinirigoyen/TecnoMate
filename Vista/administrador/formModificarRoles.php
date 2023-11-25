@@ -27,15 +27,13 @@ $n = count($usuarioRol);
 
         <div class="contenedor-dato">
             <label for="idusuario" class="form-label">ID de usuario</label>
-            <input type="text" name="idusuario" id="idusuario" class="form-control"
-                value="<?php echo $usuario[0]->getIdUsuario() ?>" readonly></input>
+            <input type="text" name="idusuario" id="idusuario" class="form-control" value="<?php echo $usuario[0]->getIdUsuario() ?>" readonly></input>
         </div>
         <br>
 
         <div class="contenedor-dato">
             <label for="usnombre" class="form-label">Nombre de usuario</label>
-            <input type="text" name="usnombre" id="usnombre" class="form-control"
-                value="<?php echo $usuario[0]->getUsNombre() ?>" readonly></input>
+            <input type="text" name="usnombre" id="usnombre" class="form-control" value="<?php echo $usuario[0]->getUsNombre() ?>" readonly></input>
         </div>
         <br>
 

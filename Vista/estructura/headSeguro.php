@@ -1,17 +1,17 @@
 <?php
 //VALIDAR ACA LA SESIÓN
 include_once("../../configuracion.php");
-    
+
 $objSession = new Session();
 
-$rol = $_SESSION['rol'];
-
+if ($objSession->validar()){
+   $rol=$_SESSION["rol"];
 $tienePermiso = $objSession->permisos();
 if (!$tienePermiso) {
     header("Location: ../home/home.php");
 } 
-$listaMenu = $objSession->verificarPermisos();
-
+$listaMenu = $objSession->menuSegunRol();
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,29 +1,24 @@
 <?php
 include_once '../../../configuracion.php';
-
-$nombre=$_POST['nombreUs'];
-$pasword=$_POST['pass'];
-$email=$_POST['email'];
-$rol=$_POST['rol'];
-
+$datos = data_submitted();
 $objUsuario = new AbmUsuario();
 $objUsuarioRol = new AbmUsuarioRol();
 
 //Guardo los parametros del Usuario
-$paramUsuario['usnombre'] = $nombre;
-$paramUsuario['uspass'] = md5($pasword);
-$paramUsuario['usmail'] = $email;
+$paramUsuario['usnombre'] = $datos['nombreUs'];
+$paramUsuario['uspass'] = md5($datos['pass']);
+$paramUsuario['usmail'] = $datos['email'];
 $paramUsuario['usdeshabilitado'] = null;
 
 //Lo cargo a la base de datos
 $exito = $objUsuario->alta($paramUsuario);
 
 if($exito){
-    $paramUsuario2['usnombre'] =$nombre;
+    $paramUsuario2['usnombre'] =$datos['nombreUs'];
     $nuevoUsuario = $objUsuario->buscar($paramUsuario2);
     $idUsuario = $nuevoUsuario[0]->getIdUsuario();
     $paramUsuarioRol['idusuario'] = $idUsuario;
-    $paramUsuarioRol['idrol'] =$rol;
+    $paramUsuarioRol['idrol'] =$datos['rol'];
     $objUsuarioRol->alta($paramUsuarioRol);
     
     echo"Usuario cargado correctamente";

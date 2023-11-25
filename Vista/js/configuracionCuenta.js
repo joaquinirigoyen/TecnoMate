@@ -5,7 +5,7 @@ function actualizarDatosUsuario(){
     console.log("Estoy en la función");
 
     $.ajax({ 
-        url: "../../Control/Ajax/actualizarDatosUsuario.php",
+        url: "../opcionesCuenta/accion/actualizarDatosUsuario.php",
         type: "POST",
         dataType: "json",
         //data: formData,
@@ -51,7 +51,7 @@ $(document).ready(function () {
             formData = {"usnombre": usnombreValue};
 
             $.ajax({ 
-                url: "../../Control/Ajax/cambiarUsNombre.php",
+                url: "../opcionesCuenta/accion/cambiarUsNombre.php",
                 type: "POST",
                 dataType: "json",
                 data: formData,
@@ -87,7 +87,7 @@ $(document).ready(function () {
             formData = {"usmail": usmailValue};
 
             $.ajax({ 
-                url: "../../Control/Ajax/cambiarUsMail.php",
+                url: "../opcionesCuenta/accion/cambiarUsMail.php",
                 type: "POST",
                 dataType: "json",
                 data: formData,
@@ -126,7 +126,7 @@ $(document).ready(function () {
                         formData = {"uspass": uspassValue};
 
                         $.ajax({ 
-                            url: "../../Control/Ajax/cambiarUsPass.php",
+                            url: "../opcionesCuenta/accion/cambiarUsPass.php",
                             type: "POST",
                             dataType: "json",
                             data: formData,

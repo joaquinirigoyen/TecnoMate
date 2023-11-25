@@ -8,25 +8,11 @@ $idUsuario = data_submitted();
 $objUsuario = new AbmUsuario();
 $usuario = $objUsuario->buscar($idUsuario);
 
-
-/* $objSesion = new Session();
-
-if ($objSesion->validar()){
-    if($_SESSION['rol'] == 1){
-        include_once '../estructura/secciones/nav-bar-2.php';
-    } else {
-        header('Location: home.php');
-    }
-    
-} else {
-    header('Location: home.php');
-} */
 ?>
-
 
 <div class="container" style="padding: 50px;">
 <div class=" text-center w-50 p-3">
-    <h5  id="respuesta"></h5>
+    <h5 style="text-color: black" id="respuesta"></h5>
 </div>
     <form id="actualizarUsuario">
         <h4>Deshabilitar o cambiar datos</h4>
@@ -34,28 +20,24 @@ if ($objSesion->validar()){
 
         <div class="contenedor-dato">
             <label for="idusuario" class="form-label">ID de usuario</label>
-            <input type="text"  id="elusuario" class="form-control"
-                value="<?php echo $usuario[0]->getIdUsuario() ?>" readonly></input>
+            <input type="text"  id="elusuario" class="form-control" value="<?php echo $usuario[0]->getIdUsuario() ?>" readonly></input>
         </div>
         <br>
 
         <div class="contenedor-dato">
             <label for="usnombre" class="form-label">Nombre de usuario</label>
-            <input type="text"  id="elnombre" class="form-control"
-                value="<?php echo $usuario[0]->getUsNombre() ?>"></input>
+            <input type="text"  id="elnombre" class="form-control" value="<?php echo $usuario[0]->getUsNombre() ?>"></input>
         </div>
         <br>
 
         <div class="contenedor-dato">
             <label for="usmail" class="form-label">Email</label>
-            <input type="text"  id="elmail" class="form-control"
-                value="<?php echo $usuario[0]->getUsMail() ?>"></input>
+            <input type="text"  id="elmail" class="form-control" value="<?php echo $usuario[0]->getUsMail() ?>"></input>
         </div>
         <br>
 
         <div class="contenedor-dato">
-            <label for="uspass" class="form-label">Contraseña</label>
-            <input type="password" id="lapass" class="form-control"></input>
+            <label for="uspass" class="form-label">Contraseña</label> <input type="password" id="lapass" class="form-control"></input>
         </div>
         <br>
         <div class="contenedor-dato">

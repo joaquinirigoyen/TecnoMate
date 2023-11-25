@@ -126,10 +126,9 @@ class Session{
     }
 
     /**
-     * Funcion que verfica si un usuario tiene permisos.
-     * Retorna false si no los tiene o una lista de los menus si tiene los roles
+     * Retorna la lista de menues asignados segun el rol.
      */
-    public function verificarPermisos(){
+    public function menuSegunRol(){
         $resp = false;
         $param['idpadre']  = $_SESSION['rol'];//guarda el rol de la session. el 3 corresponde a clientes, 2 a deposito, 1 a administrador
         $menu = new AbmMenu();//se crea un objeto menu
@@ -140,34 +139,74 @@ class Session{
         return $resp;
     }
 
-    public function permisos() {
-        // Obtén el rol actual del usuario desde la sesión
-        $rolUsuario = $_SESSION['rol'];
     
-        // Obtén la URI solicitada
-        $uriSolicitada = strtolower(trim($_SERVER['REQUEST_URI']));
-    
-        // Define los permisos permitidos para cada rol (ajusta según tus necesidades)
-        $permisos = [
-            '3' => ['/tp-finalpwd-grupo2a/vista/cliente/'],
-            '2' => ['/tp-finalpwd-grupo2a/vista/deposito/'],
-            '1' => ['/tp-finalpwd-grupo2a/vista/administrador/'],
-        ];
-    
-        // Verifica si la URI solicitada está permitida para el rol actual
-        $permitido = false;
-        foreach ($permisos[$rolUsuario] as $rutaPermitida) {
-            $rutaPermitida = strtolower(trim($rutaPermitida));
-    
-            //Verifica si la URI solicitada comienza con la ruta permitida
-            if (strpos($uriSolicitada, $rutaPermitida) === 0) {
-                $permitido = true;
-                break;
-            }
+    /**
+     * Retorna la lista de menues permitidos
+     */
+    public function menuPermisos($rol){
+        $resp = false;
+        $param['idmenu'] = $rol;//guarda el rol de la session. el 3 corresponde a clientes, 2 a deposito, 1 a administrador
+        $menu = new AbmMenu();//se crea un objeto menu
+        $listaMenu = $menu->buscar($param);//se busca el menu segun el idpadre
+        if(count($listaMenu)>0){
+            $resp = $listaMenu;
         }
-        return $permitido;
+        return $resp;
     }
+
     
+   /*Funcion permisos rehecha, optiene la url ingresada
+     y verifica si conincide con las url cargada en la base de datos segun el rol asignado*/
+    /*public function permisos() {
+      
+        $resp= false;
+        // Obtén la URI solicitada
+        $urlSolicitada = $_SERVER["REQUEST_URI"];
+        $rolUsuario = $_SESSION['rol'];
+
+        $menupermitido = $this->menuPermisos( $rolUsuario);
+
+            for ($i = 0; $i < count($menupermitido); $i++) {
+                $rutaPermitida =$menupermitido[$i]->getMeDescripcion();
+
+                 $rutaPermitida = substr($rutaPermitida, 2);
+                if (strpos($urlSolicitada, $rutaPermitida) <> false) {
+                    $resp = true;
+                }
+            }
+            return $resp;
+        }*/
+         
+
+
+
+public function permisos() {
+    // Obtén el rol actual del usuario desde la sesión
+    $rolUsuario = $_SESSION['rol'];
+
+    // Obtén la URI solicitada
+    $uriSolicitada = strtolower(trim($_SERVER['REQUEST_URI']));
+
+    // Define los permisos permitidos para cada rol (ajusta según tus necesidades)
+    $permisos = [
+        '3' => ['/tp-finalpwd-grupo2a/vista/cliente/'],
+        '2' => ['/tp-finalpwd-grupo2a/vista/deposito/'],
+        '1' => ['/tp-finalpwd-grupo2a/vista/administrador/'],
+    ];
+
+    // Verifica si la URI solicitada está permitida para el rol actual
+    $permitido = false;
+    foreach ($permisos[$rolUsuario] as $rutaPermitida) {
+        $rutaPermitida = strtolower(trim($rutaPermitida));
+
+        //Verifica si la URI solicitada comienza con la ruta permitida
+        if (strpos($uriSolicitada, $rutaPermitida) === 0) {
+            $permitido = true;
+            break;
+        }
+    }
+    return $permitido;
+}
 
     /**cierra la sesion actual */
     public function cerrar()
@@ -177,7 +216,7 @@ class Session{
         return $resp;
     }
 
-/*
+   /*
     * Elimina el carrito
     */
    public function eliminarCarrito()
@@ -190,75 +229,4 @@ class Session{
        return $exito;
    }
 
-   /**
-     * Paga el carrito
-     */
-    public function finalizarCompra($colDatos,$idUsuario){
-        $abmCompra = new AbmCompra();
-        $abmCompraEstado = new AbmCompraEstado();
-        $abmCompraItem = new AbmCompraItem();
-        $abmCompraProduct = new AbmProducto();
-
-        
-              $param['idusuario']=$idUsuario;
-             //echo $idUsuario;
-              $idCompra=$abmCompra->compraActiva($param);
-             //echo $idCompra;
-              if ( $idCompra == null){
-                $fechaC=date("Y-m-d H:i:s");
-                $arrayConsulta = [];
-                $arrayConsulta["idusuario"] = $idUsuario;
-                $arrayConsulta["cofecha"] =   $fechaC;
-                $arrayConsulta["accion"] = "nuevo";
-                $resultado = $abmCompra->abm($arrayConsulta);
-                $ultimaCompra =$abmCompra->ultimaCompra();
-                //echo  $ultimaCompra;
-                $idCompra= $ultimaCompra;
-
-              /* Crear un CompraEstado, con el tipo de estado siendo Iniciada*/
-                $arrayConsultaE = [];
-                 $arrayConsultaE["idcompra"] = $idCompra;
-                $arrayConsultaE["idcompraestadotipo"] = 1; // guardo 1 ya que es el id de la compra iniciada
-                  $arrayConsultaE["cefechaini"] = $fechaC;
-                  $arrayConsultaE["cefechafin"] = NULL;
-               // $resultado = $abmCompraEstado->abm($arrayConsultaE);
-                  $resultado = $abmCompraEstado->alta($arrayConsultaE);
-              } else if($idCompra != null){
-                $idCompra=$idCompra;
-              }
-            
-
-
-        // Creo el CompraItem
-
-        for ($i = 0; $i < count($colDatos); $i++) {
-            //print_r($colDatos);
-            $arrayConsulta = [];
-            $arrayProducto = $colDatos[$i];
-            $idProducto = $arrayProducto["id"];
-            $proCantidad = $arrayProducto["cant"];
-            $arrayConsulta["idcompra"] = $idCompra;
-            $arrayConsulta["idproducto"] = $idProducto;
-            $arrayConsulta["cicantidad"] = $proCantidad;
-            $abmCompraItem->alta($arrayConsulta);
-
-            $stok= $arrayProducto["stock"];
-            $nuevoStock= ($stok - $proCantidad);
-
-            $paramP['idproducto']=$idProducto;
-         
-            $buscarProd= $abmCompraProduct->buscar($paramP);
-            $paramPr['idproducto']=$buscarProd[0]->getIdProducto();
-            $paramPr['pronombre']=$buscarProd[0]->getProNombre();
-            $paramPr['prodetalle']=$buscarProd[0]->getProDetalle();
-            $paramPr['procantstock']= $nuevoStock;
-            $paramPr['tipo']=$buscarProd[0]->getTipo();
-            $paramPr['imagenproducto']=$buscarProd[0]->getImagenProducto();
-            $setearpro= $abmCompraProduct->modificar($paramPr);
-            
-        }
- 
-
-        $this->eliminarCarrito();
-    }
 }

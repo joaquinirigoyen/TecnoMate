@@ -6,17 +6,10 @@ $texto = $_GET["nombre"];
 $tituloPagina = "TechnoMate | " . $texto;
 $datos = data_submitted();
 
-
-$tituloPagina = "TechnoMate | Productos";
-
-
-
-
 $objProduc = new AbmProducto();
 
 // Obtener los elementos de navegación
 // Obtiene el nombre del textO DEL MENU SELECCIONADO
-
 
 $tipoDeProduc = $texto;
 $param['tipo'] =  $tipoDeProduc;
