@@ -34,7 +34,7 @@
                               </div>
                             </div>
                           </div>                                        
-                          <button type="button" class="btn btn-danger quitarItem" onclick="quitarItem(<?php echo $item->getIdCompraItem();?>)">Quitar item</button> 
+                          <!-- <button type="button" class="btn btn-danger quitarItem" onclick="quitarItem(<?php echo $item->getIdCompraItem();?>)">Quitar item</button>  -->
                         </div>
                       </div>
                     </div>

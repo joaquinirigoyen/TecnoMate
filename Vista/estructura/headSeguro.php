@@ -10,6 +10,7 @@ $tienePermiso = $objSession->permisos();
 if (!$tienePermiso) {
     header("Location: ../home/home.php");
 } 
+
 $listaMenu = $objSession->verificarPermisos();
 
 ?>
