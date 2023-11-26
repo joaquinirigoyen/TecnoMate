@@ -8,6 +8,8 @@
 
    $listaMenu=  $session->menuPermisos($rol);
    print_r( $listaMenu);
-*/
+   $resp=  $session->permisos($rol);
+   echo   $resp;
+    */
 
 ?>

@@ -141,7 +141,7 @@ class Session{
 
     
     /**
-     * Retorna la lista de menues permitidos
+     * Retorna la lista de menues permitidos segun el rol
      */
     public function menuPermisos($rol){
         $resp = false;
@@ -154,59 +154,37 @@ class Session{
         return $resp;
     }
 
-    
-   /*Funcion permisos rehecha, optiene la url ingresada
-     y verifica si conincide con las url cargada en la base de datos segun el rol asignado*/
-    /*public function permisos() {
+
       
-        $resp= false;
-        // Obtén la URI solicitada
-        $urlSolicitada = $_SERVER["REQUEST_URI"];
-        $rolUsuario = $_SESSION['rol'];
+    /**
+     * Esta es en respuesta a alo que la profe nos pidio revisar.
+     * Verifica que tengan permiso para ingresar a la url solicitada.. 
+     */
+    public function permisos($rolUsuario){
 
-        $menupermitido = $this->menuPermisos( $rolUsuario);
+        $resp=False;
+        $objMenu = new AbmMenu();
+        $uriSolicitada = $_SERVER["PHP_SELF"];// obtiene la ruta ingresada por url
+    
+        $menupermitido = $this-> menuPermisos($rolUsuario);// busca los menu segun el rol
 
-            for ($i = 0; $i < count($menupermitido); $i++) {
-                $rutaPermitida =$menupermitido[$i]->getMeDescripcion();
+        $objMenuRol = new AbmMenuRol();
+        $paramIdMenu['idmenu'] =   $menupermitido[0]->getIdMenu();
+        $idmenu =   $paramIdMenu['idmenu'] ;
 
-                 $rutaPermitida = substr($rutaPermitida, 2);
-                if (strpos($urlSolicitada, $rutaPermitida) <> false) {
-                    $resp = true;
-                }
-            }
-            return $resp;
-        }*/
+        /*condicion si el rol concide*/
+        if (  $idmenu == $rolUsuario ){
+            $rutaPermitida =$menupermitido[0]->getMeNombre();
          
-
-
-
-public function permisos() {
-    // Obtén el rol actual del usuario desde la sesión
-    $rolUsuario = $_SESSION['rol'];
-
-    // Obtén la URI solicitada
-    $uriSolicitada = strtolower(trim($_SERVER['REQUEST_URI']));
-
-    // Define los permisos permitidos para cada rol (ajusta según tus necesidades)
-    $permisos = [
-        '3' => ['/tp-finalpwd-grupo2a/vista/cliente/'],
-        '2' => ['/tp-finalpwd-grupo2a/vista/deposito/'],
-        '1' => ['/tp-finalpwd-grupo2a/vista/administrador/'],
-    ];
-
-    // Verifica si la URI solicitada está permitida para el rol actual
-    $permitido = false;
-    foreach ($permisos[$rolUsuario] as $rutaPermitida) {
-        $rutaPermitida = strtolower(trim($rutaPermitida));
-
-        //Verifica si la URI solicitada comienza con la ruta permitida
-        if (strpos($uriSolicitada, $rutaPermitida) === 0) {
-            $permitido = true;
-            break;
-        }
+            $encontro =strpos($uriSolicitada, $rutaPermitida );//buscar si la ruta permitida esta dentro de la url solicitada
+            /* si las 2 condiciones se cumple va  retornar true*/
+            if ( $encontro > 0){
+                $resp = true;
+            }
+        }    
+        return $resp;
     }
-    return $permitido;
-}
+
 
     /**cierra la sesion actual */
     public function cerrar()

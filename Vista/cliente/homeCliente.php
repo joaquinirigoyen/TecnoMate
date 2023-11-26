@@ -3,6 +3,7 @@ include_once("../../configuracion.php");
 $tituloPagina = "TechnoMate | Inicio";
 include_once("../estructura/headSeguro.php");
 include_once '../estructura/navSeguro.php'; 
+
 ?>
 
 <div class="contenido-pagina">

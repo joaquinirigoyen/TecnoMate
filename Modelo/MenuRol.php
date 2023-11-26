@@ -129,6 +129,7 @@ class MenuRol {
     
 
       public static function listar($parametro = "") {
+        echo"entro a listar del abm";
         $arreglo = array();
         $base = new BaseDatos();
         $sql = "SELECT * FROM menurol ";
@@ -137,11 +138,11 @@ class MenuRol {
         }
         $res = $base->Ejecutar($sql);
         if ($res > -1) {
+          echo"paso por el ejecutar";
           if ($res > 0) {
     
             while ($row = $base->Registro()) {
-              $obj = new MenuRol();
-    
+              echo"paso por r";
               $objMenu = new Menu();
               $objMenu->setIdMenu($row['idmenu']);
               $objMenu->cargar();
@@ -149,7 +150,8 @@ class MenuRol {
               $objRol = new Rol();
               $objRol->setIdRol($row['idrol']);
               $objRol->cargar();
-    
+              
+              $obj = new MenuRol();
               $obj->setear($objMenu, $objRol);
     
               array_push($arreglo, $obj);

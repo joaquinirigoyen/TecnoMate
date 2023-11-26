@@ -14,7 +14,8 @@
             <div class="collapse navbar-collapse menuUsuario" id="navbar-Toggler">
                 <ul class="navbar-nav d-flex justify-content-center align-items-center">
                 <?php
-
+                $objSession = new Session();
+               $listaMenu = $objSession->menuSegunRol();
                  for ($i = 0; $i < count($listaMenu); $i++) {
                     if ($listaMenu[$i]->getMeDeshabilitado() == null) {
 

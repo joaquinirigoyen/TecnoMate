@@ -159,18 +159,17 @@ class AbmMenuRol{
      * @return array
      */
     public function buscar($param){
-
+  echo"entro a buscar del abm";
         /*Se incia la consulta sql en true por que facilita el armado de la misma
         según el criterio de busqueda */
         $where = " true ";
 
         if ($param <> NULL){
 
-            if  (isset($param['idrol']))
-                $where .= " and idrol = ".$param['idrol'];
-
             if  (isset($param['idmenu']))
                 $where.= " and idmenu = '".$param['idmenu'];
+            if  (isset($param['idrol']))
+                $where .= " and idrol = ".$param['idrol'];
 
         }
 

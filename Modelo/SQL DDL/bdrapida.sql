@@ -202,9 +202,9 @@ ALTER TABLE `menu`
 -- Volcado de datos para la tabla 'menu'
 --
 INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VALUES
-(1, 'administrador', '../estructura/navSeguro.php', NULL, NULL),
-(2, 'deposito', '../estructura/navSeguro.php', NULL, NULL),
-(3, 'cliente', '../estructura/navSeguro.php', NULL, NULL),
+(1, 'administrador', 'Vista/cliente/homeAdministrador.php', NULL, NULL),
+(2, 'deposito', 'Vista/cliente/homeDeposito.php', NULL, NULL),
+(3, 'cliente', 'Vista/cliente/homeCliente.php', NULL, NULL),
 
 /*Administrador*/
 (4, 'Ha ingresado como administrador', 'homeAdministrador.php', 1, NULL),

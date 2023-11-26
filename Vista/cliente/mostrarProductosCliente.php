@@ -1,6 +1,6 @@
 <?php
 include_once("../../configuracion.php");
-include_once("../estructura/headSeguro.php");
+include_once("../estructura/headInseguro.php");
 include_once("../estructura/navSeguro.php");
 $texto = $_GET["nombre"];
 $tituloPagina = "TechnoMate | " . $texto;

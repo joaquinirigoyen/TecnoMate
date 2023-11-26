@@ -3,15 +3,12 @@
 include_once("../../configuracion.php");
 
 $objSession = new Session();
+$rolUsuario = $_SESSION['rol'];
 
-if ($objSession->validar()){
-   $rol=$_SESSION["rol"];
-$tienePermiso = $objSession->permisos();
-if (!$tienePermiso) {
-    header("Location: ../home/home.php");
-} 
-$listaMenu = $objSession->menuSegunRol();
+if(!$objSession->validar() || !$objSession->permisos($rolUsuario)){
+  header("Location: ../home/home.php");
 }
+
 ?>
 
 <!DOCTYPE html>
