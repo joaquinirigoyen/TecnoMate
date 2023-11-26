@@ -1,16 +1,4 @@
 <?php
-    // include_once('../../../configuracion.php'); 
-    // $data = data_submitted();
-    // verEstructura($data);
-    // $objAbmCompraItem= new AbmCompraItem();
-    // $data ["accion"] = "borrarItem";
-    // $resultado = $objAbmCompraItem -> abm($data);
-
-    // if ($resultado["exito"]) {
-    //     echo json_encode(array("success" => true));
-    // } else {
-    //     echo "no anduvo";
-    // }
 include_once("../../../configuracion.php");
 $datos = data_submitted();//Recibe idcompraitem 
 

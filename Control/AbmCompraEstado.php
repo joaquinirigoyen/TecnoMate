@@ -80,8 +80,8 @@ class AbmCompraEstado{
         $datos['cefechaini'] = $ceFechaIni; // fecha Inicio estado
         $datos['cefechafin'] = $fecha_actual;// fecha Fin estado
 
-        echo "estoy en actualizar";
-        print_r($datos);
+        // echo "estoy en actualizar";
+        // print_r($datos);
         $respuesta = $compraEstado->abm($datos);
         $exito = $respuesta["exito"];
 

@@ -5,10 +5,27 @@ include_once("../../configuracion.php");
 $objSession = new Session();
 $rolUsuario = $_SESSION['rol'];
 
+<<<<<<< HEAD
 if(!$objSession->validar() || !$objSession->permisos($rolUsuario)){
   header("Location: ../home/home.php");
 }
 
+=======
+if ($objSession->validar()){
+   $rol=$_SESSION["rol"];
+$tienePermiso = $objSession->permisos();
+if (!$tienePermiso) {
+    header("Location: ../home/home.php");
+} 
+<<<<<<< HEAD
+
+$listaMenu = $objSession->verificarPermisos();
+
+=======
+$listaMenu = $objSession->menuSegunRol();
+}
+>>>>>>> 7523fbbd20586e70e3358ad46116e14469d35b4d
+>>>>>>> 43e7ac0a365e89e2f00340975448962d0e6b0626
 ?>
 
 <!DOCTYPE html>
